@@ -1,0 +1,45 @@
+<!-- Brand Showcase Section (Repeatable for each brand) -->
+<div class="brand-showcase__wrapper" id="brands">
+  
+  <section 
+    *ngFor="let brand of brands; let i = index" 
+    [id]="brand.id"
+    class="brand-section"
+    [class.brand-section--active]="activeBrandId === brand.id">
+    
+    <!-- Background -->
+    <div class="brand-section__background"></div>
+    
+    <!-- Content Container -->
+    <div class="brand-section__container" [class.rtl-layout]="i % 2 !== 0">
+      
+      <!-- Left: Content -->
+      <div class="brand-section__content reveal" [class.ltr-content]="i % 2 !== 0" [delay]="300" appReveal>
+        <span class="brand-badge">{{ brand.category }}</span>
+        <h1 class="brand-section__title">{{ brand.name }}</h1>
+        <p class="brand-section__description">{{ brand.description }}</p>
+        
+        <div class="brand-section__ctas">
+          <button 
+            class="btn btn-primary"
+            (click)="handleCTA(brand.primaryCTA.action)">
+            {{ brand.primaryCTA.label }}
+          </button>
+        </div>
+      </div>
+      
+      <!-- Right: Media -->
+      <div class="brand-section__media reveal" appReveal *ngIf="brand.image">
+        <div class="brand-image-wrapper">
+            <img 
+            [src]="brand.image" 
+            [alt]="brand.name"
+            class="brand-section__image"
+            loading="lazy" />
+        </div>
+      </div>
+      
+    </div>
+  </section>
+  
+</div>

@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="M Tech Square Group - Unified ecosystem of innovation across education, technology, and healthcare sectors in Egypt.">
+    <meta name="keywords"
+        content="tech education, medical conferences, software development, digital marketing, e-learning">
+    <meta property="og:title" content="M Tech Square Group - Integrated Innovation Ecosystem">
+    <meta property="og:description" content="Five specialized brands working in perfect harmony">
+    <meta property="og:image" content="Msquare.jpeg">
+    <meta name="theme-color" content="#001F3F">
+    <title>M Tech Square Group - Unified Innovation Ecosystem</title>
+
+    <!-- Fonts -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+  
+    <!-- Premium Typography Loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Libraries -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <style>
+        :root {
+            /* Basic Theme */
+            --navy: #001F3F;
+            --navy-dark: #0A0F1F;
+            --navy-deep: #050a14;
+            --gold: #D5B182;
+            --gold-bright: #E8C9A0;
+            --white: #FFFFFF;
+            --text-muted: rgba(255, 255, 255, 0.7);
+
+            /* Brand Colors */
+            --techno-accent: #0066FF;
+            --online-accent: #17A2B8;
+            --code-accent: #663399;
+            --msquare-accent: #2C3E50;
+            --digital-accent: #FF1493;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 70px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Syne', sans-serif;
+            background: var(--navy);
+            overflow-x: hidden;
+            color: var(--white);
+        }
+
+        /* --- Global Scroll Progress --- */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+            width: 0%;
+            z-index: 9999;
+            transition: width 0.1s ease-out;
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3, h4, .serif-font {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* --- Navbar --- */
+        header.navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: transparent;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+        }
+
+        header.navbar.scrolled {
+            background: rgba(0, 31, 63, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            height: 80px;
+        }
+
+        .navbar-container {
+            width: 100%;
+            max-width: 1600px;
+            padding: 0 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .company-name-block {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+        
+        .company-name-p1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--white);
+            text-transform: uppercase;
+        }
+        
+        .company-name-p2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            margin: 0;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--white);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--white);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            right: 0;
+            background: rgba(0, 31, 63, 0.98);
+            backdrop-filter: blur(10px);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            z-index: 999;
+        }
+
+        .mobile-menu.open {
+            max-height: 100vh;
+            padding: 20px;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .mobile-menu a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 15px 0;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--navy);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, var(--navy) 0%, var(--navy-deep) 90%);
+            z-index: 1;
+        }
+
+        #hero-canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            margin-top: 60px;
+            max-width: 1000px;
+            padding: 0 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-badge {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 80px rgba(255, 255, 255, 0.2), 0 0 120px rgba(200, 169, 126, 0.2);
+            margin-bottom: 30px;
+            background: #fff;
+            padding: 5px;
+        }
+
+        .hero-badge img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .hero-title {
+            font-size: clamp(60px, 12vw, 130px);
+            margin: 0 0 20px 0;
+            letter-spacing: 2px;
+            line-height: 1.1;
+            text-transform: uppercase;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .hero-desc {
+            font-size: clamp(16px, 2.5vw, 22px);
+            color: var(--text-muted);
+            margin: 0 0 40px 0;
+            line-height: 1.8;
+            max-width: 800px;
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: #111;
+            padding: 22px 70px;
+            border-radius: 50px;
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .btn-gold:hover {
+            background: var(--gold-bright);
+            box-shadow: 0 10px 30px rgba(200, 169, 126, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* --- About / Parent Entity --- */
+        .about-section {
+            padding: 140px 40px;
+            background: #FFFFFF;
+            color: #555555;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .about-label {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .about-label::before, .about-label::after {
+            content: '';
+            height: 1px;
+            width: 40px;
+            background: var(--gold);
+        }
+
+        .about-title {
+            color: var(--navy-dark);
+            font-size: clamp(36px, 5vw, 52px);
+            margin-bottom: 40px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .about-text {
+            max-width: 800px;
+            font-size: 18px;
+            line-height: 1.9;
+        }
+
+        .about-text p {
+            margin-bottom: 24px;
+        }
+        
+        /* --- Timeline Segment --- */
+        .timeline-section {
+            padding: 120px 40px;
+            background: #FAFAFA;
+            color: var(--navy);
+            position: relative;
+        }
+
+        .tl-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .tl-header h2 {
+            font-size: clamp(36px, 5vw, 48px);
+            margin: 0 0 10px 0;
+            color: var(--navy-dark);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .tl-header p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .tl-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* The vertical guide */
+        .tl-track {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            background: rgba(200, 169, 126, 0.2);
+        }
+
+        .tl-fill {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            background: var(--gold);
+            height: 0%; /* JS driven */
+        }
+
+        .tl-item {
+            position: relative;
+            margin-bottom: 60px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .tl-item:nth-child(odd) { flex-direction: row-reverse; }
+
+        .tl-node {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 16px;
+            height: 16px;
+            background: var(--white);
+            border: 3px solid rgba(200, 169, 126, 0.3);
+            border-radius: 50%;
+            z-index: 2;
+            transition: all 0.4s ease;
+        }
+
+        .tl-node.active {
+            border-color: var(--gold);
+            background: var(--gold);
+            box-shadow: 0 0 20px rgba(200, 169, 126, 0.8);
+            transform: translate(-50%, -50%) scale(1.3);
+        }
+
+        .tl-content {
+            width: 45%;
+            background: #fff;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+        
+        .tl-item:nth-child(even) .tl-content { transform: translateX(-40px); }
+        .tl-item:nth-child(odd) .tl-content { transform: translateX(40px); }
+
+        .tl-item.visible .tl-content {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .tl-year {
+            color: var(--gold);
+            font-weight: 800;
+            font-family: 'Syne', sans-serif;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .tl-title {
+            font-size: 24px;
+            margin: 0 0 10px 0;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .tl-desc {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* --- Brand Sections Common --- */
+        .brand-section {
+            padding: 120px 40px;
+            overflow: hidden;
+            contain: content;
+        }
+
+        .brand-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .brand-section:nth-child(even) .brand-container {
+            direction: rtl;
+        }
+        .brand-section:nth-child(even) .brand-content {
+            direction: ltr;
+        }
+
+        .brand-image {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4/5;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        .brand-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .brand-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .brand-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .brand-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 24px;
+        }
+
+        .brand-title {
+            font-size: clamp(36px, 6vw, 56px);
+            margin: 0 0 20px 0;
+            color: var(--white);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .brand-desc {
+            font-size: 17px;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .brand-ctas {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+        }
+
+        .brand-btn-fill {
+            flex: 1;
+            text-align: center;
+            padding: 18px;
+            border-radius: 50px;
+            color: var(--white);
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .brand-btn-outline {
+            flex: 1;
+            text-align: center;
+            padding: 16px;
+            border-radius: 50px;
+            background: transparent;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border: 2px solid currentColor;
+            transition: all 0.3s ease;
+        }
+
+        .brand-btn-fill:hover, .brand-btn-outline:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            filter: brightness(1.2);
+        }
+
+        /* --- Specific Brand Themes --- */
+        /* Techno Square */
+        #techno { background: linear-gradient(135deg, #001833 0%, #002244 50%, #001229 100%); }
+        #techno .brand-badge { background: rgba(0, 102, 255, 0.15); border: 1px solid rgba(0, 102, 255, 0.3); color: var(--techno-accent); }
+        #techno .brand-btn-fill { background: var(--techno-accent); }
+        #techno .brand-btn-outline { color: var(--techno-accent); }
+
+        /* Online */
+        #online { background: linear-gradient(135deg, #001A20 0%, #002A33 50%, #001520 100%); }
+        #online .brand-badge { background: rgba(23, 162, 184, 0.15); border: 1px solid rgba(23, 162, 184, 0.3); color: var(--online-accent); }
+        #online .brand-btn-fill { background: var(--online-accent); }
+        #online .brand-btn-outline { color: var(--online-accent); }
+
+        /* Code Square */
+        #code { background: linear-gradient(135deg, #1A0033 0%, #220044 50%, #150029 100%); }
+        #code .brand-badge { background: rgba(102, 51, 153, 0.15); border: 1px solid rgba(102, 51, 153, 0.3); color: var(--code-accent); }
+        #code .brand-btn-fill { background: var(--code-accent); }
+        #code .brand-btn-outline { color: var(--code-accent); }
+
+        /* M Square */
+        #msquare { background: linear-gradient(135deg, #0F1A24 0%, #1A2D3D 50%, #0D161F 100%); }
+        #msquare .brand-badge { background: rgba(44, 62, 80, 0.2); border: 1px solid rgba(44, 62, 80, 0.4); color: #8AA4BF; }
+        #msquare .brand-btn-fill { background: var(--msquare-accent); }
+        #msquare .brand-btn-outline { color: #8AA4BF; }
+
+        /* Digital Studio */
+        #digital { background: linear-gradient(135deg, #1F0015 0%, #330022 50%, #1A0011 100%); }
+        #digital .brand-badge { background: rgba(255, 20, 147, 0.15); border: 1px solid rgba(255, 20, 147, 0.3); color: var(--digital-accent); }
+        #digital .brand-btn-fill { background: var(--digital-accent); }
+        #digital .brand-btn-outline { color: var(--digital-accent); }
+
+
+        /* --- Business Flow --- */
+        .flow-section {
+            padding: 120px 40px;
+            background: var(--navy-dark);
+        }
+
+        .flow-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .flow-header {
+            margin-bottom: 60px;
+            color: var(--white);
+        }
+
+        .flow-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: rgba(255, 255, 255, 0.1);
+            line-height: 1;
+        }
+
+        .flow-header h2 {
+            font-size: 14px;
+            letter-spacing: 4px;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin: 10px 0;
+            font-family: 'Syne', sans-serif;
+            font-weight: 600;
+        }
+
+        .flow-subtitle {
+            font-size: clamp(32px, 5vw, 48px);
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .flow-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(200, 169, 126, 0.15);
+            border-radius: 12px;
+            padding: 32px;
+            position: relative;
+            transition: all 0.3s;
+            color: var(--white);
+        }
+        
+        .flow-card:hover {
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .flow-icon {
+            width: 40px; height: 40px;
+            border: 1px solid var(--gold);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 30px;
+        }
+        .icon-circle { border-radius: 50%; }
+        .icon-square { border-radius: 4px; }
+        .icon-triangle { border: none; width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-bottom: 35px solid var(--gold); background: transparent; }
+        .icon-diamond { transform: rotate(45deg); border-radius: 4px; margin: 10px 0 40px 10px; }
+
+        .flow-step-num {
+            font-size: 11px;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .flow-card h3 {
+            font-size: 24px;
+            margin: 0 0 16px 0;
+            text-transform: uppercase;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .flow-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .flow-tools {
+            font-size: 11px;
+            color: rgba(255,255,255,0.4);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 16px;
+        }
+
+        /* --- Contact --- */
+        .contact-section {
+            padding: 100px 40px;
+            background: #FFFFFF;
+            text-align: center;
+            color: var(--navy-dark);
+        }
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .contact-section h2 {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: var(--navy-dark);
+            font-family: 'Playfair Display', serif;
+        }
+        .contact-subtitle {
+            font-size: 16px; color: #666; margin-bottom: 50px;
+        }
+        .contact-form { text-align: left; }
+        .form-group { margin-bottom: 24px; }
+        .form-group label {
+            display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px;
+            color: #444;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 16px;
+            background: #F9F9F9;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px; color: #333; font-family: inherit; font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none; border-color: var(--gold); background: #FFF;
+            box-shadow: 0 0 10px rgba(200, 169, 126, 0.2);
+        }
+        .btn-submit {
+            width: 100%; padding: 18px; border-radius: 8px; background: var(--gold);
+            color: #111; font-weight: 700; font-size: 16px; border: none; cursor: pointer;
+            letter-spacing: 1px; text-transform: uppercase; transition: 0.3s;
+        }
+        .btn-submit:hover { background: var(--gold-bright); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(200,169,126,0.3); }
+
+        /* --- Footer --- */
+        .footer {
+            background: #050A14;
+            padding: 80px 40px 30px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--white);
+        }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+        }
+        .footer h4 { color: var(--gold); font-size: 18px; margin-bottom: 20px; font-family: 'Playfair Display', serif; }
+        .footer p, .footer a { color: rgba(255,255,255,0.6); font-size: 14px; text-decoration: none; line-height: 1.8; }
+        .footer a:hover { color: var(--gold); }
+        .footer ul { list-style: none; padding: 0; margin: 0; }
+        .footer ul li { margin-bottom: 12px; }
+        .footer-bottom {
+            max-width: 1200px; margin: 60px auto 0; padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1); text-align: center;
+            font-size: 13px; color: rgba(255,255,255,0.4);
+        }
+
+        /* --- Mobile Overrides --- */
+        @media (max-width: 900px) {
+            .navbar-container { padding: 0 20px; }
+            .brand-container { grid-template-columns: 1fr; gap: 40px; }
+            .brand-section:nth-child(even) .brand-container { direction: ltr; }
+            .brand-image { max-width: 500px; margin: 0 auto; aspect-ratio: 16/9; }
+            .hero-title { font-size: 50px; }
+            .tl-track, .tl-fill { left: 20px; }
+            .tl-item { flex-direction: column !important; align-items: flex-end; }
+            .tl-node { left: 20px; }
+            .tl-content { width: calc(100% - 60px); }
+            .tl-item:nth-child(even) .tl-content, .tl-item:nth-child(odd) .tl-content { transform: translateX(20px); }
+            .tl-item.visible .tl-content { transform: translateX(0); }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+        }
+        
+        @media (max-width: 992px) {
+            .nav-links { display: none; }
+            .mobile-menu-toggle { display: block; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Scroll Progress -->
+    <div id="scroll-progress"></div>
+
+    <!-- Navbar -->
+    <header class="navbar" id="navbar">
+        <div class="navbar-container">
+            <a href="#" class="logo-section">
+                <img src="Msquare.jpeg" class="logo" alt="Logo">
+                <div class="company-name-block">
+                    <span class="company-name-p1">M TECH</span>
+                    <span class="company-name-p2">SQUARE GROUP</span>
+                </div>
+            </a>
+            <nav class="nav-links">
+                <a href="#home">HOME</a>
+                <a href="#about">ECOSYSTEM</a>
+                <a href="#techno">EDUCATION</a>
+                <a href="#msquare">MEDICAL</a>
+                <a href="#code">SOFTWARE</a>
+                <a href="#journey">SYNERGY</a>
+            </nav>
+            <button class="mobile-menu-toggle" id="mobileToggle">☰</button>
+        </div>
+    </header>
+
+    <nav class="mobile-menu" id="mobileMenu">
+        <a href="#home">HOME</a>
+        <a href="#about">ECOSYSTEM</a>
+        <a href="#techno">EDUCATION</a>
+        <a href="#msquare">MEDICAL</a>
+        <a href="#code">SOFTWARE</a>
+        <a href="#journey">SYNERGY</a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <canvas id="hero-canvas"></canvas>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <img src="Msquare.jpeg" alt="Badge">
+            </div>
+            <h1 class="hero-title serif-font">BEYOND<br>SQUARES</h1>
+            <p class="hero-desc">Driving the future of Egyptian innovation through a unified ecosystem of technology, classroom motivation, and medical excellence.</p>
+            <a href="#about" class="btn-gold">EXPLORE OUR GENESIS</a>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about-section" id="about">
+        <div class="about-label" data-aos="fade-in">The Parent Entity</div>
+        <h2 class="about-title serif-font" data-aos="fade-up">M Tech Square Group</h2>
+        <div class="about-text" data-aos="fade-up" data-aos-delay="100">
+            <p>Establishing as a premier holding company in Cairo, M Tech Square Group unites five specialized entities under a singular vision of technological and educational excellence.</p>
+            <p>We serve as the strategic umbrella that fosters growth across software development, digital marketing, vocational training for youth, and medical professional development.</p>
+            <p>Our mission is to empower Egypt's next generation with the tools of tomorrow while providing world-class professional services to enterprises across the region.</p>
+        </div>
+    </section>
+    
+    <!-- Timeline -->
+    <section class="timeline-section" id="journey">
+        <div class="tl-header" data-aos="fade-up">
+            <h2 class="serif-font">Our Journey</h2>
+            <p>The Evolution of Our Ecosystem</p>
+        </div>
+        <div class="tl-container" id="timelineContainer">
+            <div class="tl-track"></div>
+            <div class="tl-fill" id="timelineFill"></div>
+            
+            <div class="tl-item" data-tl="1">
+                <div class="tl-node"></div>
+                <div class="tl-content">
+                    <div class="tl-year">2019</div>
+                    <h3 class="tl-title serif-font">Code Square</h3>
+                    <p class="tl-desc">Founded as a premium software house, delivering bespoke mobile and enterprise solutions.</p>
+                </div>
+            </div>
+            <div class="tl-item" data-tl="2">
+                <div class="tl-node"></div>
+                <div class="tl-content">
+                    <div class="tl-year">2020</div>
+                    <h3 class="tl-title serif-font">M Square</h3>
+                    <p class="tl-desc">Launched to bridge medical professionals with global knowledge through conferences.</p>
+                </div>
+            </div>
+            <div class="tl-item" data-tl="3">
+                <div class="tl-node"></div>
+                <div class="tl-content">
+                    <div class="tl-year">2021</div>
+                    <h3 class="tl-title serif-font">Techno Square</h3>
+                    <p class="tl-desc">Egypt's pioneering tech education institute nurturing young innovators.</p>
+                </div>
+            </div>
+            <div class="tl-item" data-tl="4">
+                <div class="tl-node"></div>
+                <div class="tl-content">
+                    <div class="tl-year">2022</div>
+                    <h3 class="tl-title serif-font">Digital Studio</h3>
+                    <p class="tl-desc">Creative marketing arm established to amplify brand presence across digital channels.</p>
+                </div>
+            </div>
+            <div class="tl-item" data-tl="5">
+                <div class="tl-node"></div>
+                <div class="tl-content">
+                    <div class="tl-year">2023</div>
+                    <h3 class="tl-title serif-font">Online</h3>
+                    <p class="tl-desc">E-learning platform launched, democratizing access to expert-led courses.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand 1: Techno -->
+    <section class="brand-section" id="techno">
+        <div class="brand-container">
+            <div class="brand-image" data-aos="zoom-in">
+                <img src="techno_square_hero_1774722411438.png" alt="Techno">
+            </div>
+            <div class="brand-content" data-aos="fade-left">
+                <div class="brand-badge">Education Academy</div>
+                <h2 class="brand-title serif-font">Techno Square</h2>
+                <p class="brand-desc">Egypt's leading technology institute dedicated to nurturing young minds. We combine cutting-edge programming education with entrepreneurship training, preparing children for success in tomorrow's innovation economy.</p>
+                <div class="brand-ctas">
+                    <a href="#" class="brand-btn-fill">Join Academy</a>
+                    <a href="#" class="brand-btn-outline">Syllabus</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand 2: Online -->
+    <section class="brand-section" id="online">
+        <div class="brand-container">
+            <div class="brand-image" data-aos="zoom-in">
+                <img src="online_platform_hero_1774722473670.png" alt="Online">
+            </div>
+            <div class="brand-content" data-aos="fade-right">
+                <div class="brand-badge">E-Learning Platform</div>
+                <h2 class="brand-title serif-font">Online</h2>
+                <p class="brand-desc">Advanced e-learning ecosystem providing accessibility to top-tier expertise. Our platform hosts both live masterclasses and recorded certification paths, bridging the learning gap.</p>
+                <div class="brand-ctas">
+                    <a href="#" class="brand-btn-fill">Start Learning</a>
+                    <a href="#" class="brand-btn-outline">Teachers</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand 3: Code -->
+    <section class="brand-section" id="code">
+        <div class="brand-container">
+            <div class="brand-image" data-aos="zoom-in">
+                <img src="code_square_hero_1774722443180.png" alt="Code">
+            </div>
+            <div class="brand-content" data-aos="fade-left">
+                <div class="brand-badge">Software House</div>
+                <h2 class="brand-title serif-font">Code Square</h2>
+                <p class="brand-desc">Premium software house delivering bespoke digital solutions. We specialize in mobile applications, enterprise software, and cloud systems. Innovation at the core of every line of code.</p>
+                <div class="brand-ctas">
+                    <a href="#" class="brand-btn-fill">Start Project</a>
+                    <a href="#" class="brand-btn-outline">Portfolio</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand 4: M Square -->
+    <section class="brand-section" id="msquare">
+        <div class="brand-container">
+            <div class="brand-image" data-aos="zoom-in">
+                <img src="m_square_hero_1774722429077.png" alt="M Square">
+            </div>
+            <div class="brand-content" data-aos="fade-right">
+                <div class="brand-badge">Medical Academy</div>
+                <h2 class="brand-title serif-font">M Square</h2>
+                <p class="brand-desc">Medical conference experts, providing high-quality training and events that bridge medical professionals with global knowledge. Hosting with internationally certified accreditation.</p>
+                <div class="brand-ctas">
+                    <a href="#" class="brand-btn-fill">View Events</a>
+                    <a href="#" class="brand-btn-outline">Contact</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand 5: Digital -->
+    <section class="brand-section" id="digital">
+        <div class="brand-container">
+            <div class="brand-image" data-aos="zoom-in">
+                <img src="digital_studio_hero_1774722457394.png" alt="Digital">
+            </div>
+            <div class="brand-content" data-aos="fade-left">
+                <div class="brand-badge">Creative Agency</div>
+                <h2 class="brand-title serif-font">Digital Studio</h2>
+                <p class="brand-desc">Creative marketing agency blending data-driven strategies with premium design aesthetics. We build brands that resonate in the digital age, narrating your unique story.</p>
+                <div class="brand-ctas">
+                    <a href="#" class="brand-btn-fill">Brand Audit</a>
+                    <a href="#" class="brand-btn-outline">Case Studies</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Flow -->
+    <section class="flow-section" id="process">
+        <div class="flow-container">
+            <div class="flow-header" data-aos="fade-up">
+                <div class="flow-num">03</div>
+                <h2>Our Process</h2>
+                <h3 class="flow-subtitle serif-font">From Vision to Unified Impact.</h3>
+            </div>
+            <div class="flow-grid">
+                <div class="flow-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="flow-icon icon-circle"></div>
+                    <div class="flow-step-num">Step 1</div>
+                    <h3 class="serif-font">Educate</h3>
+                    <p>Techno Square trains emerging talent, building a foundation of logic and problem-solving.</p>
+                    <div class="flow-tools">Tools: STEM, Robotics, Logic</div>
+                </div>
+                <div class="flow-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flow-icon icon-square"></div>
+                    <div class="flow-step-num">Step 2</div>
+                    <h3 class="serif-font">Develop</h3>
+                    <p>Code Square employs top talent to build robust software systems and mobile products.</p>
+                    <div class="flow-tools">Tools: Flutter, Cloud, AI</div>
+                </div>
+                <div class="flow-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flow-icon icon-triangle"></div>
+                    <div class="flow-step-num">Step 3</div>
+                    <h3 class="serif-font">Market</h3>
+                    <p>Digital Studio takes the completed products and builds compelling market presence.</p>
+                    <div class="flow-tools">Tools: Ads, Content, Strategy</div>
+                </div>
+                <div class="flow-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flow-icon icon-diamond"></div>
+                    <div class="flow-step-num">Step 4</div>
+                    <h3 class="serif-font">Deliver</h3>
+                    <p>Online and M Square platforms distribute knowledge and solutions at scale globally.</p>
+                    <div class="flow-tools">Tools: LMS, Conferences, Reach</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container" data-aos="fade-up">
+            <h2 class="serif-font">Get In Touch</h2>
+            <p class="contact-subtitle">Let's build the future together.</p>
+            <form class="contact-form" onsubmit="event.preventDefault()">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="john@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea rows="5" placeholder="Tell us about your project..." required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Dispatch Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <h4>M Tech Square Group</h4>
+                <p>Unified innovation ecosystem across education, technology, and healthcare sectors in Egypt.</p>
+            </div>
+            <div>
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="#about">The Parent Entity</a></li>
+                    <li><a href="#process">Our Process</a></li>
+                    <li><a href="#journey">Journey</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Brands</h4>
+                <ul>
+                    <li><a href="#techno">Techno Square</a></li>
+                    <li><a href="#code">Code Square</a></li>
+                    <li><a href="#msquare">M Square</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <p>info@mtechsquare.com</p>
+                <p>Cairo, Egypt</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 M Tech Square Group. Engineered for excellence.
+        </div>
+    </footer>
+
+    <!-- GSAP for advanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    
+    <script>
+        // 1. Initialization
+        AOS.init({ duration: 800, once: false, offset: 100 });
+
+        // 2. Hero Canvas Particles
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 1.5;
+                this.vy = (Math.random() - 0.5) * 1.5;
+                this.radius = Math.random() * 2 + 1;
+                this.opacity = Math.random() * 0.5 + 0.1;
+                // Pure gold color rgb(200, 169, 126) with variable opacity
+                this.color = `rgba(200, 169, 126, ${this.opacity})`;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Bounce horizontally
+                if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+                    this.vx = -this.vx;
+                }
+                // Bounce vertically
+                if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+                    this.vy = -this.vy;
+                }
+                this.draw();
+            }
+        }
+
+        const particlesArray = [];
+        const numberOfParticles = 60;
+        
+        for (let i = 0; i < numberOfParticles; i++) {
+            particlesArray.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        window.addEventListener('resize', resizeCanvas);
+
+
+        // 3. GSAP Hero Timeline
+        const heroTl = gsap.timeline();
+        
+        // Initial setup for hero GSAP elements
+        gsap.set('.hero-badge', { scale: 0, autoAlpha: 0 });
+        gsap.set('.hero-title', { y: 100, autoAlpha: 0 });
+        gsap.set('.hero-desc', { y: 50, autoAlpha: 0 });
+        gsap.set('.btn-gold', { scale: 0, autoAlpha: 0 });
+
+        // Animation execution
+        window.addEventListener('load', () => {
+            heroTl.to('.hero-badge', { duration: 1.5, scale: 1, autoAlpha: 1, rotation: 360, ease: "back.out(1.5)" })
+                  .to('.hero-title', { duration: 1.2, y: 0, autoAlpha: 1, ease: "power3.out" }, "-=0.5")
+                  .to('.hero-desc', { duration: 1.2, y: 0, autoAlpha: 1, ease: "power2.out" }, "-=0.8")
+                  .to('.btn-gold', { duration: 0.8, scale: 1, autoAlpha: 1, ease: "back.out(1.7)" }, "-=0.3");
+        });
+
+        // 4. Navbar & Scroll Progress
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+            
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            document.getElementById('scroll-progress').style.width = (winScroll / height) * 100 + "%";
+
+            // Timeline Fill Logic
+            let tlContainer = document.getElementById('timelineContainer');
+            if (tlContainer) {
+                let rect = tlContainer.getBoundingClientRect();
+                let vh = window.innerHeight;
+                let progress = (vh/2 - rect.top) / rect.height;
+                progress = Math.max(0, Math.min(1, progress));
+                // ensure we don't start filling before it's on screen
+                let fillPercent = progress * 100;
+                document.getElementById('timelineFill').style.height = fillPercent + '%';
+                
+                document.querySelectorAll('.tl-item').forEach((item, index) => {
+                    let itemProgress = (index) / 4; 
+                    if (progress >= itemProgress - 0.05) {
+                        item.querySelector('.tl-node').classList.add('active');
+                        item.classList.add('visible');
+                    } else {
+                        item.querySelector('.tl-node').classList.remove('active');
+                        item.classList.remove('visible');
+                    }
+                });
+            }
+        });
+
+        // 5. Mobile menu
+        document.getElementById('mobileToggle').onclick = () => {
+            document.getElementById('mobileMenu').classList.toggle('open');
+        };
+        document.querySelectorAll('.mobile-menu a').forEach(a => {
+            a.onclick = () => document.getElementById('mobileMenu').classList.remove('open');
+        });
+
+    </script>
+</body>
+</html>

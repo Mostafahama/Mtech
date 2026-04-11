@@ -1,0 +1,50 @@
+<!-- Scroll Progress -->
+<div id="scroll-progress"></div>
+
+<app-navbar></app-navbar>
+
+<!-- Hero is Eagerly loaded (Above the fold) -->
+<app-hero></app-hero>
+
+<!-- Everything below the hero is Lazy Loaded on viewport entry -->
+@defer (on viewport) {
+  <app-about></app-about>
+} @placeholder {
+  <div style="min-height: 80vh"></div>
+}
+
+@defer (on viewport) {
+  <app-timeline></app-timeline>
+} @placeholder {
+  <div style="min-height: 80vh"></div>
+}
+
+@defer (on viewport) {
+  <app-ecosystem></app-ecosystem>
+} @placeholder {
+  <div style="min-height: 100vh"></div>
+}
+
+@defer (on viewport) {
+  <app-process-flow></app-process-flow>
+} @placeholder {
+  <div style="min-height: 60vh"></div>
+}
+
+@defer (on viewport) {
+  <app-brand-showcase></app-brand-showcase>
+} @placeholder {
+  <div style="min-height: 100vh"></div>
+}
+
+@defer (on viewport) {
+  <app-contact></app-contact>
+} @placeholder {
+  <div style="min-height: 80vh"></div>
+}
+
+@defer (on viewport) {
+  <app-footer></app-footer>
+} @placeholder {
+  <div style="min-height: 400px"></div>
+}

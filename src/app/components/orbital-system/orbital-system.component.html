@@ -1,0 +1,192 @@
+<div class="orbital-container" #orbitalContainer>
+  <!-- SVG Canvas -->
+  <svg class="orbital-svg" #orbitalSvg viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
+    <!-- DEFS: Gradients, Filters, Styles -->
+    <defs>
+      <!-- Background Gradient -->
+      <radialGradient id="bgGradient" cx="50%" cy="50%" r="60%">
+        <stop offset="0%" style="stop-color:#0A1F3F; stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#000000; stop-opacity:1" />
+      </radialGradient>
+
+      <!-- Glow Filters -->
+      <filter id="glowFilter">
+        <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+        <feMerge>
+          <feMergeNode in="coloredBlur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+
+      <!-- Shadow Filter -->
+      <filter id="shadowFilter">
+        <feDropShadow dx="0" dy="8" stdDeviation="4" flood-opacity="0.4" />
+      </filter>
+
+      <!-- Subtle Star Pattern -->
+      <pattern id="stars" patternUnits="userSpaceOnUse" width="200" height="200">
+        <circle cx="50" cy="50" r="0.5" fill="#C8A97E" opacity="0.1" />
+        <circle cx="100" cy="100" r="0.3" fill="#C8A97E" opacity="0.08" />
+        <circle cx="150" cy="75" r="0.4" fill="#C8A97E" opacity="0.06" />
+      </pattern>
+    </defs>
+
+    <!-- Background -->
+    <rect width="1200" height="1200" fill="url(#bgGradient)" />
+    <rect width="1200" height="1200" fill="url(#stars)" opacity="0.3" />
+
+    <!-- ORBIT PATHS (3 circles, very subtle) -->
+    <circle class="orbit-path" cx="600" cy="600" r="280" />
+    <circle class="orbit-path" cx="600" cy="600" r="310" />
+    <circle class="orbit-path" cx="600" cy="600" r="340" />
+
+    <!-- CONNECTION LINES (from center to planets) -->
+    <ng-container *ngFor="let planet of planets">
+      <line
+        class="connection-line"
+        x1="600"
+        y1="600"
+        [attr.x2]="600 + planet.distance * Math.cos((planet.angle * Math.PI) / 180)"
+        [attr.y2]="600 + planet.distance * Math.sin((planet.angle * Math.PI) / 180)"
+      />
+    </ng-container>
+
+    <!-- CENTRAL HUB (M Tech Logo) -->
+    <g class="central-hub" filter="url(#glowFilter)">
+      <!-- Outer glow rings -->
+      <circle cx="600" cy="600" r="110" class="glow-ring glow-ring-outer" />
+      <circle cx="600" cy="600" r="105" class="glow-ring glow-ring-inner" />
+
+      <!-- Main hub circle -->
+      <circle cx="600" cy="600" r="95" class="hub-bg" filter="url(#shadowFilter)" />
+
+      <!-- Logo image (M Tech) -->
+      <image
+        href="assets/Techno.jpeg"
+        x="540"
+        y="540"
+        width="120"
+        height="120"
+        class="hub-logo"
+      />
+
+      <!-- Title -->
+      <text x="600" y="680" class="hub-title">M TECH SQUARE</text>
+
+      <!-- Subtitle -->
+      <text x="600" y="710" class="hub-subtitle">Unified Ecosystem</text>
+
+      <!-- Rotating outer ring -->
+      <circle cx="600" cy="600" r="120" class="rotating-ring" />
+    </g>
+
+    <!-- PLANETS (5 brands orbiting) -->
+    <ng-container *ngFor="let planet of planets">
+      <g
+        class="planet"
+        [attr.data-planet]="planet.id"
+        (mouseenter)="onPlanetHover(planet.id, $event)"
+        (mouseleave)="onPlanetLeave(planet.id)"
+        (click)="onPlanetClick(planet)"
+      >
+        <!-- Glow halo -->
+        <circle
+          class="planet-glow"
+          [attr.cx]="600 + planet.distance * Math.cos((planet.angle * Math.PI) / 180)"
+          [attr.cy]="600 + planet.distance * Math.sin((planet.angle * Math.PI) / 180)"
+          [attr.r]="planet.size + 20"
+          [attr.fill]="planet.color"
+        />
+
+        <!-- Shadow -->
+        <circle
+          class="planet-shadow"
+          [attr.cx]="600 + planet.distance * Math.cos((planet.angle * Math.PI) / 180) + 4"
+          [attr.cy]="600 + planet.distance * Math.sin((planet.angle * Math.PI) / 180) + 6"
+          [attr.r]="planet.size"
+          filter="url(#shadowFilter)"
+        />
+
+        <!-- Main planet sphere -->
+        <circle
+          class="planet-sphere"
+          [attr.cx]="600 + planet.distance * Math.cos((planet.angle * Math.PI) / 180)"
+          [attr.cy]="600 + planet.distance * Math.sin((planet.angle * Math.PI) / 180)"
+          [attr.r]="planet.size"
+          [attr.fill]="planet.color"
+          filter="url(#glowFilter)"
+        />
+
+        <!-- 3D Highlight (shine) -->
+        <circle
+          class="planet-shine"
+          [attr.cx]="
+            600 +
+            planet.distance * Math.cos((planet.angle * Math.PI) / 180) -
+            planet.size / 3
+          "
+          [attr.cy]="
+            600 +
+            planet.distance * Math.sin((planet.angle * Math.PI) / 180) -
+            planet.size / 3
+          "
+          [attr.r]="planet.size / 2.5"
+        />
+
+        <!-- Planet label (Single letter) -->
+        <text
+          class="planet-label"
+          [attr.x]="600 + planet.distance * Math.cos((planet.angle * Math.PI) / 180)"
+          [attr.y]="600 + planet.distance * Math.sin((planet.angle * Math.PI) / 180)"
+        >
+          {{ planet.tooltip }}
+        </text>
+
+        <!-- Outer ring -->
+        <circle
+          class="planet-ring"
+          [attr.cx]="600 + planet.distance * Math.cos((planet.angle * Math.PI) / 180)"
+          [attr.cy]="600 + planet.distance * Math.sin((planet.angle * Math.PI) / 180)"
+          [attr.r]="planet.size + 12"
+          [attr.stroke]="planet.color"
+        />
+      </g>
+    </ng-container>
+  </svg>
+
+  <!-- TOOLTIP (on hover) -->
+  <div class="tooltip" style="opacity: 0;"></div>
+
+  <!-- INFO MODAL (on click) -->
+  <div class="modal-backdrop" *ngIf="selectedPlanet" (click)="closeModal()"></div>
+
+  <div class="info-modal" *ngIf="selectedPlanet">
+    <button class="modal-close" (click)="closeModal()">✕</button>
+
+    <div class="modal-header" [style.background]="'linear-gradient(135deg, ' + selectedPlanet.color + ' 0%, ' + selectedPlanet.color + '88 100%)'">
+      <div class="modal-icon" [style.background-color]="selectedPlanet.color"></div>
+    </div>
+
+    <div class="modal-body">
+      <h2>{{ selectedPlanet.fullName }}</h2>
+      <p class="modal-year">Established {{ selectedPlanet.year }}</p>
+
+      <p class="modal-description">{{ selectedPlanet.description }}</p>
+
+      <!-- Stats -->
+      <div class="modal-stats">
+        <div class="stat" *ngFor="let stat of selectedPlanet.stats | keyvalue">
+          <span class="stat-value">{{ stat.value | number }}</span>
+          <span class="stat-label">{{ stat.key | titlecase }}</span>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="modal-actions">
+        <!-- Changed to default alerts due to missing handler routing, simple UI placeholders -->
+        <button class="btn-primary" (click)="closeModal()">Explore</button>
+        <button class="btn-secondary" (click)="closeModal()">Learn More</button>
+      </div>
+    </div>
+  </div>
+</div>

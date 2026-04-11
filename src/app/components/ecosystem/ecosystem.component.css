@@ -1,0 +1,832 @@
+/* ═══════════════════════════════════════════════
+   ECOSYSTEM SECTION — Premium Glass & Performance
+   BEM naming: .eco__*
+   
+   Official Color Palette:
+   --navy:        #001F3F     (primary dark bg)
+   --navy-dark:   #0A0F1F    (card bg base)
+   --gold:        #D5B182    (classic gold accent)
+   --gold-bright: #E8C9A0   (hover gold)
+   --teal:        #1DD4BF    (integration label only)
+   --white:       #FFFFFF    (primary text)
+   ═══════════════════════════════════════════════ */
+
+/* ── Design Tokens ─────────────────────────────── */
+.eco {
+    /* Primary Palette */
+    --eco-navy: #001F3F;
+    --eco-navy-dark: #0A0F1F;
+    --eco-navy-deep: #050a14;
+    --eco-gold: #D5B182;
+    --eco-gold-bright: #E8C9A0;
+    --eco-teal: #1DD4BF;
+    --eco-white: #FFFFFF;
+    --eco-text-muted: rgba(255, 255, 255, 0.55);
+    --eco-text-dim: rgba(255, 255, 255, 0.5);
+
+    /* Glass Effect Tokens */
+    --eco-glass-bg: rgba(10, 15, 31, 0.72);
+    --eco-glass-border: rgba(213, 177, 130, 0.25);
+    --eco-glass-accent: rgba(213, 177, 130, 0.5);
+    --eco-glass-blur: 28px;
+
+    /* Layout Tokens */
+    --eco-card-width: 280px;
+
+    /* Easing Tokens */
+    --eco-ease-smooth: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --eco-ease-decel: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --eco-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* ── Section Container ─────────────────────────── */
+.eco {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(180deg,
+      #0a101f 0%,
+      #0d1525 25%,
+      #0F1419 50%,
+      #0b1020 75%,
+      #080d18 100%
+    );
+    overflow: hidden;
+    padding: 80px 0 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* ── Section Header ────────────────────────────── */
+.eco__header {
+    text-align: center;
+    padding: 0 40px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.eco__header-num {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 48px;
+    color: rgba(255, 255, 255, 0.05);
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.eco__header-label {
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: var(--eco-gold);
+    text-transform: uppercase;
+    margin: 0 0 8px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+}
+
+.eco__header-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(28px, 5vw, 48px);
+    color: var(--eco-white);
+    margin: 0 0 12px;
+    font-weight: 700;
+}
+
+.eco__header-desc {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(14px, 1.8vw, 17px);
+    color: var(--eco-text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+
+/* ── SVG Canvas Wrapper ────────────────────────── */
+.eco__canvas-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+}
+
+.eco__svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform: translateZ(0); /* GPU compositing layer */
+    will-change: transform;
+}
+
+
+/* ══════════════════════════════════════════════════
+   SVG ELEMENT STYLES
+   ══════════════════════════════════════════════════ */
+
+/* ── SVG Text ──────────────────────────────────── */
+.eco__center-text {
+    fill: var(--eco-white);
+    text-transform: uppercase;
+}
+
+.eco__center-text--main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 5px;
+}
+
+.eco__center-text--sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+.eco__center-text--label {
+    font-family: 'Syne', sans-serif;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 6px;
+    fill: rgba(213, 177, 130, 0.8);
+}
+
+
+/* ── Planet Text ───────────────────────────────── */
+.eco__planet-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 800;
+    fill: var(--eco-white);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    pointer-events: none;
+}
+
+.eco__planet-subtitle {
+    font-family: 'Syne', sans-serif;
+    font-size: 7px;
+    font-weight: 600;
+    fill: rgba(213, 177, 130, 0.85);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    pointer-events: none;
+}
+
+
+/* ══════════════════════════════════════════════════
+   CSS KEYFRAMES — All animations GPU-accelerated
+   ══════════════════════════════════════════════════ */
+
+/* Flowing energy along connection paths */
+@keyframes ecoDashFlow {
+    0%   { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: -40; }
+}
+
+/* Star twinkle */
+@keyframes ecoTwinkle {
+    0%, 100% { opacity: 0.06; }
+    50%      { opacity: 0.35; }
+}
+
+/* Central hub pulse ring (primary) */
+@keyframes ecoPulseRing {
+    0%, 100% { r: 95;  opacity: 0.1; }
+    50%      { r: 108; opacity: 0.3; }
+}
+
+/* Central hub pulse ring (secondary, offset) */
+@keyframes ecoPulseRingSecondary {
+    0%, 100% { r: 100; opacity: 0.08; }
+    50%      { r: 115; opacity: 0.2; }
+}
+
+/* Planet glow on hover — using official gold #D5B182 */
+@keyframes ecoPlanetGlowOn {
+    from {
+        filter: brightness(1) drop-shadow(0 0 8px rgba(213, 177, 130, 0.3));
+    }
+    to {
+        filter: brightness(1.25) drop-shadow(0 0 24px rgba(213, 177, 130, 0.6));
+    }
+}
+
+/* Card slide-in with premium bounce */
+@keyframes ecoCardSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Modal overlay fade in */
+@keyframes ecoOverlayFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Modal content scale-in with premium feel */
+@keyframes ecoModalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Decorative star slow rotation */
+@keyframes ecoStarRotate {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+
+/* ══════════════════════════════════════════════════
+   CONNECTION PATHS (CSS dash animation)
+   ══════════════════════════════════════════════════ */
+.eco__path {
+    stroke-dasharray: 12 8;
+    animation: ecoDashFlow 40s linear infinite;
+    will-change: stroke-dashoffset;
+    transition: opacity 0.3s var(--eco-ease-standard);
+}
+
+.eco__path--center {
+    opacity: 0.6;
+}
+
+.eco__path--inter {
+    opacity: 0.3;
+}
+
+
+/* ══════════════════════════════════════════════════
+   STAR FIELD
+   ══════════════════════════════════════════════════ */
+.eco__stars circle {
+    animation-name: ecoTwinkle;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    will-change: opacity;
+}
+
+
+/* ══════════════════════════════════════════════════
+   CENTRAL HUB PULSE (CSS animated, no JS)
+   ══════════════════════════════════════════════════ */
+.eco__center-pulse {
+    animation: ecoPulseRing 4s ease-in-out infinite;
+    will-change: r, opacity;
+}
+
+.eco__center-pulse--secondary {
+    animation: ecoPulseRingSecondary 6s ease-in-out infinite;
+}
+
+
+/* ══════════════════════════════════════════════════
+   PLANET HOVER & INTERACTION
+   ══════════════════════════════════════════════════ */
+.eco__planet {
+    cursor: pointer;
+    transition: transform 0.35s var(--eco-ease-smooth);
+    will-change: transform;
+    outline: none; /* Custom focus styles below */
+}
+
+.eco__planet .eco__planet-sphere {
+    transition: filter 0.35s var(--eco-ease-smooth);
+    transform-origin: center;
+}
+
+/* Hover & Active: enhanced glow + scale */
+.eco__planet:hover .eco__planet-sphere,
+.eco__planet--active .eco__planet-sphere {
+    animation: ecoPlanetGlowOn 0.3s var(--eco-ease-smooth) forwards;
+}
+
+.eco__planet:hover,
+.eco__planet--active {
+    transform: scale(1.08);
+}
+
+/* Keyboard focus ring (accessibility) */
+.eco__planet:focus-visible {
+    outline: 2px solid var(--eco-gold);
+    outline-offset: 8px;
+    border-radius: 50%;
+}
+
+
+/* Decorative 4-pointed stars */
+.eco__deco-star {
+    animation: ecoStarRotate 60s linear infinite;
+    transform-origin: center;
+}
+
+
+/* ══════════════════════════════════════════════════
+   GLASS INFO CARD — Premium Frosted Glassmorphism
+   
+   Uses --navy-dark (#0A0F1F) at 72% opacity as base.
+   Accent layers: --gold (#D5B182) and --gold-bright (#E8C9A0) only.
+   Text hierarchy: white → text-muted → gold (interactive).
+   ══════════════════════════════════════════════════ */
+.eco__info-card {
+    width: var(--eco-card-width);
+    background: var(--eco-glass-bg);
+    backdrop-filter: blur(var(--eco-glass-blur)) saturate(1.15) brightness(0.95);
+    -webkit-backdrop-filter: blur(var(--eco-glass-blur)) saturate(1.15) brightness(0.95);
+    border: 1px solid var(--eco-glass-border);
+    border-left: 4px solid var(--eco-glass-accent);
+    border-radius: 12px;
+    padding: 24px;
+    color: var(--eco-white);
+    pointer-events: auto;
+    animation: ecoCardSlideIn 0.28s var(--eco-ease-smooth);
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.6),
+      0 0 50px rgba(213, 177, 130, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transition: all 300ms var(--eco-ease-decel);
+}
+
+/* Enhanced glass on card hover */
+.eco__info-card:hover {
+    backdrop-filter: blur(32px) saturate(1.25) brightness(1.0);
+    -webkit-backdrop-filter: blur(32px) saturate(1.25) brightness(1.0);
+    border-left-color: rgba(232, 201, 160, 0.7);
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.7),
+      0 0 60px rgba(213, 177, 130, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.eco__info-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.eco__info-card-initial {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--eco-gold);
+    line-height: 1;
+    min-width: 36px;
+    text-align: center;
+    transition: text-shadow 300ms ease;
+}
+
+/* Initial letter glow intensifies on card hover */
+.eco__info-card:hover .eco__info-card-initial {
+    text-shadow: 0 0 24px rgba(213, 177, 130, 0.5);
+}
+
+.eco__info-card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin: 0;
+    color: var(--eco-white);
+}
+
+.eco__info-card-tagline {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    color: rgba(213, 177, 130, 0.8);
+    margin: 2px 0 0;
+    font-style: italic;
+    letter-spacing: 0.5px;
+}
+
+
+/* ── Services List with micro-interactions ─────── */
+.eco__info-card-services {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+}
+
+.eco__info-card-services li {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.75);
+    padding: 6px 0 6px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    position: relative;
+    transition: all 150ms ease;
+}
+
+.eco__info-card-services li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--eco-gold);
+    font-size: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: color 150ms ease, text-shadow 150ms ease;
+}
+
+/* Service items glow on card hover */
+.eco__info-card:hover .eco__info-card-services li {
+    color: var(--eco-white);
+    background: rgba(213, 177, 130, 0.04);
+}
+
+.eco__info-card:hover .eco__info-card-services li::before {
+    color: var(--eco-gold-bright);
+    text-shadow: 0 0 12px rgba(213, 177, 130, 0.4);
+}
+
+/* Individual item hover — slight slide */
+.eco__info-card-services li:hover {
+    transform: translateX(3px);
+}
+
+
+/* ── Ecosystem Role ──────────────────────────── */
+.eco__info-card-integration {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    color: var(--eco-text-dim);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.eco__info-card-integration-label {
+    color: var(--eco-teal);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 3px;
+    letter-spacing: 1px;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+
+/* ── CTA Button — inverse fill on hover ──────── */
+.eco__info-card-cta {
+    width: 100%;
+    background: transparent;
+    border: 1px solid rgba(213, 177, 130, 0.5);
+    color: var(--eco-gold);
+    padding: 10px;
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 300ms var(--eco-ease-smooth);
+}
+
+.eco__info-card-cta:hover {
+    background: var(--eco-gold-bright);
+    color: var(--eco-navy);
+    border-color: var(--eco-gold-bright);
+    transform: scale(1.02);
+}
+
+.eco__info-card-cta:active {
+    transform: scale(0.98);
+}
+
+.eco__info-card-cta:focus-visible {
+    outline: 2px solid var(--eco-gold);
+    outline-offset: 2px;
+}
+
+
+/* ══════════════════════════════════════════════════
+   MODAL — Enhanced Glass + Consistent Official Colors
+   ══════════════════════════════════════════════════ */
+.eco__modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: ecoOverlayFadeIn 0.2s ease-out forwards;
+}
+
+.eco__modal {
+    background: rgba(10, 15, 31, 0.88);
+    backdrop-filter: blur(32px) saturate(1.1);
+    -webkit-backdrop-filter: blur(32px) saturate(1.1);
+    border: 1px solid rgba(213, 177, 130, 0.3);
+    border-top: 2px solid rgba(232, 201, 160, 0.5);
+    border-radius: 16px;
+    padding: 48px;
+    max-width: 580px;
+    width: 92%;
+    position: relative;
+    animation: ecoModalFadeIn 0.3s var(--eco-ease-smooth) forwards;
+    box-shadow:
+      0 50px 120px rgba(0, 0, 0, 1),
+      0 0 80px rgba(213, 177, 130, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.eco__modal-close {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    font-size: 45px;
+    color: var(--eco-gold);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    line-height: 1;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.eco__modal-close:hover {
+    color: var(--eco-gold-bright);
+    transform: scale(1.1);
+}
+
+.eco__modal-close:focus-visible {
+    outline: 2px solid var(--eco-gold);
+    outline-offset: 4px;
+}
+
+.eco__modal-icon {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 100px;
+    color: var(--eco-gold);
+    text-align: center;
+    line-height: 1;
+    text-shadow: 0 0 30px rgba(213, 177, 130, 0.2);
+}
+
+.eco__modal-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    color: var(--eco-white);
+    margin: 16px 0 10px;
+    text-align: center;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.eco__modal-subtitle {
+    font-family: 'Syne', sans-serif;
+    color: var(--eco-gold);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    margin-bottom: 35px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.eco__modal-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 30px;
+}
+
+.eco__modal-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.eco__modal-features li {
+    padding: 14px 0 14px 20px;
+    color: rgba(255, 255, 255, 0.8);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    position: relative;
+    transition: color 150ms ease;
+}
+
+.eco__modal-features li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--eco-gold);
+    font-size: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: color 150ms ease, text-shadow 150ms ease;
+}
+
+.eco__modal-features li:hover {
+    color: var(--eco-white);
+}
+
+.eco__modal-features li:hover::before {
+    color: var(--eco-gold-bright);
+    text-shadow: 0 0 12px rgba(213, 177, 130, 0.4);
+}
+
+.eco__modal-integration {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    color: var(--eco-text-dim);
+    line-height: 1.7;
+    margin-bottom: 35px;
+    padding: 16px;
+    border-left: 4px solid var(--eco-teal);
+    background: rgba(29, 212, 191, 0.04);
+    border-radius: 4px;
+}
+
+.eco__modal-integration strong {
+    color: var(--eco-teal);
+    display: block;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.eco__modal-btn {
+    width: 100%;
+    background: var(--eco-gold);
+    color: var(--eco-navy);
+    padding: 20px;
+    border: none;
+    font-weight: 800;
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    letter-spacing: 3px;
+    font-size: 13px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    transition: all 300ms var(--eco-ease-smooth);
+}
+
+.eco__modal-btn:hover {
+    background: var(--eco-gold-bright);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(213, 177, 130, 0.2);
+}
+
+.eco__modal-btn:active {
+    transform: translateY(0);
+}
+
+.eco__modal-btn:focus-visible {
+    outline: 2px solid var(--eco-white);
+    outline-offset: 3px;
+}
+
+
+/* ══════════════════════════════════════════════════
+   ACCESSIBILITY — Reduced Motion
+   ══════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+    .eco__path,
+    .eco__stars circle,
+    .eco__center-pulse,
+    .eco__deco-star {
+        animation: none !important;
+    }
+
+    .eco__planet,
+    .eco__planet .eco__planet-sphere,
+    .eco__info-card,
+    .eco__info-card-services li,
+    .eco__info-card-cta,
+    .eco__modal-overlay,
+    .eco__modal,
+    .eco__modal-btn {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    /* Keep hover states visible, just static */
+    .eco__planet:hover .eco__planet-sphere,
+    .eco__planet--active .eco__planet-sphere {
+        filter: brightness(1.25) drop-shadow(0 0 15px rgba(213, 177, 130, 0.6));
+        animation: none !important;
+    }
+
+    .eco__planet:hover,
+    .eco__planet--active {
+        transform: scale(1.08);
+    }
+}
+
+
+/* ══════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ══════════════════════════════════════════════════ */
+
+/* ── Tablet (≤768px) ──────────────────────────── */
+@media (max-width: 768px) {
+    .eco {
+        padding: 60px 0 40px;
+        --eco-card-width: 240px;
+    }
+
+    .eco__canvas-wrap {
+        max-width: 600px;
+    }
+
+    .eco__info-card {
+        padding: 18px;
+    }
+
+    .eco__info-card-initial {
+        font-size: 28px;
+    }
+
+    .eco__info-card-title {
+        font-size: 14px;
+    }
+
+    .eco__modal {
+        padding: 35px;
+    }
+
+    .eco__modal-icon {
+        font-size: 70px;
+    }
+
+    .eco__modal-title {
+        font-size: 24px;
+    }
+}
+
+
+/* ── Mobile (≤480px) ──────────────────────────── */
+@media (max-width: 480px) {
+    .eco {
+        padding: 40px 0 20px;
+        min-height: auto;
+        --eco-card-width: 220px;
+        --eco-glass-blur: 18px; /* Lighter blur for low-end devices */
+    }
+
+    .eco__header-title {
+        font-size: 26px;
+    }
+
+    .eco__canvas-wrap {
+        max-width: 100%;
+        padding: 0 10px;
+    }
+
+    /* Hide inter-pillar paths on mobile (reduce visual noise) */
+    .eco__path--inter {
+        display: none;
+    }
+
+    .eco__info-card {
+        padding: 14px;
+    }
+
+    .eco__info-card-services li {
+        font-size: 11px;
+        padding: 4px 0 4px 14px;
+    }
+
+    .eco__modal {
+        padding: 25px;
+        width: 96%;
+    }
+
+    .eco__modal-icon {
+        font-size: 55px;
+    }
+
+    .eco__modal-title {
+        font-size: 20px;
+    }
+
+    .eco__modal-close {
+        font-size: 32px;
+        top: 15px;
+        right: 20px;
+    }
+}

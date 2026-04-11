@@ -1,0 +1,341 @@
+/* ═══════════════════════════════════════════════════════
+   BRAND SHOWCASE SECTION — UNIFIED STYLING
+   ═══════════════════════════════════════════════════════ */
+
+/* ──────────────────────────────────────────────────────── 
+   SECTION WRAPPER
+   ──────────────────────────────────────────────────────── */
+
+.brand-section {
+  position: relative;
+  width: 100%;
+  padding: 120px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  contain: content;
+}
+
+.brand-section__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    var(--navy) 0%,
+    var(--navy-dark) 50%,
+    var(--navy-deep) 100%
+  );
+  z-index: -2;
+}
+
+/* ──────────────────────────────────────────────────────── 
+   CONTAINER & LAYOUT
+   ──────────────────────────────────────────────────────── */
+
+.brand-section__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  align-items: center;
+  z-index: 1;
+}
+
+.brand-section__container.rtl-layout {
+  direction: rtl;
+}
+
+/* ──────────────────────────────────────────────────────── 
+   CONTENT SIDE (Text)
+   ──────────────────────────────────────────────────────── */
+
+.brand-section__content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+}
+
+.brand-section__content.ltr-content {
+  direction: ltr;
+}
+
+/* ──────────────────────────────────────────────────────── 
+   BADGE (Category Label)
+   ──────────────────────────────────────────────────────── */
+
+.brand-badge {
+  display: inline-block;
+  width: fit-content;
+  background: transparent;
+  border: 1px solid var(--gold);
+  border-radius: 50px;
+  padding: 8px 20px;
+  color: var(--gold);
+  font-family: 'Syne', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  transition: all 300ms ease;
+  margin-bottom: 4px;
+}
+
+.brand-badge:hover {
+  background: rgba(213, 177, 130, 0.08); /* Very subtle gold tint */
+  border-color: var(--gold-bright);
+  color: var(--gold-bright);
+}
+
+/* ──────────────────────────────────────────────────────── 
+   HEADING
+   ──────────────────────────────────────────────────────── */
+
+.brand-section__title {
+  margin: 0;
+  color: var(--white);
+  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 700;
+  letter-spacing: 2px;
+  line-height: 1.1;
+}
+
+/* ──────────────────────────────────────────────────────── 
+   DESCRIPTION
+   ──────────────────────────────────────────────────────── */
+
+.brand-section__description {
+  margin: 0 0 20px 0;
+  color: var(--text-muted);
+  font-family: 'Syne', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.8;
+  max-width: 520px;
+}
+
+/* ──────────────────────────────────────────────────────── 
+   CTA BUTTONS
+   ──────────────────────────────────────────────────────── */
+
+.brand-section__ctas {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* ──────────────────────────────────────────────────────── 
+   BUTTON STYLES (Global)
+   ──────────────────────────────────────────────────────── */
+
+.btn {
+  padding: 16px 40px;
+  font-family: 'Syne', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: 2px solid;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  outline: none;
+  flex: 1;
+  text-align: center;
+}
+
+.btn:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Primary Button (Filled Gold) */
+.btn-primary {
+  background: var(--gold-bright);
+  color: var(--navy);
+  border-color: var(--gold-bright);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--gold);
+  border-color: var(--gold);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 8px 16px rgba(213, 177, 130, 0.15);
+}
+
+/* Secondary Button (Outline Gold) */
+.btn-secondary {
+  background: transparent;
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: rgba(213, 177, 130, 0.08); /* Very subtle gold tint */
+  border-color: var(--gold-bright);
+  color: var(--gold-bright);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.btn-secondary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* ──────────────────────────────────────────────────────── 
+   MEDIA SIDE (Image/Logo)
+   ──────────────────────────────────────────────────────── */
+
+.brand-section__media {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/5;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+}
+
+.brand-section__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.brand-image-wrapper:hover .brand-section__image {
+  transform: scale(1.05);
+}
+
+/* ──────────────────────────────────────────────────────── 
+   SPECIFIC BRAND OVERRIDES
+   ──────────────────────────────────────────────────────── */
+
+#msquare .brand-image-wrapper {
+  background: var(--white);
+  padding: 40px;
+}
+
+#msquare .brand-section__image {
+  object-fit: contain;
+}
+
+/* ──────────────────────────────────────────────────────── 
+   RESPONSIVE DESIGN
+   ──────────────────────────────────────────────────────── */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .brand-section {
+    padding: 80px 40px;
+  }
+  
+  .brand-section__container {
+    gap: 40px;
+  }
+  
+  .brand-section__title {
+    font-size: clamp(28px, 4vw, 40px);
+  }
+  
+  .brand-section__description {
+    font-size: 15px;
+  }
+  
+  .btn {
+    padding: 14px 32px;
+    font-size: 12px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .brand-section {
+    padding: 60px 20px;
+  }
+  
+  .brand-section__container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .brand-section__container.rtl-layout {
+    direction: ltr;
+  }
+  
+  .brand-section__title {
+    font-size: 32px;
+  }
+  
+  .brand-section__description {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  
+  .brand-section__ctas {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 12px;
+    border-radius: 50px;
+  }
+  
+  .brand-section__media {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .brand-image-wrapper {
+      aspect-ratio: 16/9;
+  }
+}
+
+/* ──────────────────────────────────────────────────────── 
+   ACCESSIBILITY
+   ──────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .brand-badge,
+  .brand-section__image {
+    transition: none !important;
+  }
+  
+  .btn:hover,
+  .brand-image-wrapper:hover .brand-section__image {
+    transform: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  /* Colors already optimized for dark mode */
+}
