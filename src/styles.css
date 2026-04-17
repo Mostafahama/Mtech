@@ -35,16 +35,24 @@ html {
     scroll-padding-top: 70px;
 }
 
-body {
+* {
+    box-sizing: border-box;
+}
+
+html, body {
     margin: 0;
     padding: 0;
-    padding-bottom: env(safe-area-inset-bottom);
+    width: 100%;
+    overflow-x: hidden;
     font-family: var(--font-sans);
     background: var(--navy);
-    overflow-x: hidden;
     color: var(--white);
     transition: background 0.3s ease;
     -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* --- Arabic Overrides (Centered RTL Logic) --- */
@@ -58,13 +66,15 @@ body {
 }
 
 /* Focus on Text Alignment — centered layout, keep everything centered */
-[lang="ar"] p, [lang="ar"] span, [lang="ar"] div:not(.centered-container) {
+[lang="ar"] p, [lang="ar"] span, [lang="ar"] h1, [lang="ar"] h2, [lang="ar"] h3, [lang="ar"] .serif-font {
     text-align: center;
     word-break: break-word;
 }
 
 [lang="ar"] .centered-container, [lang="ar"] .navbar-container {
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Fix vertical rhythm for Arabic */

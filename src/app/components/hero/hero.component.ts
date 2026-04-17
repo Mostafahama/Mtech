@@ -124,40 +124,41 @@ class Particle {
         max-width: 1000px;
     }
     .logo-item { 
-        height: 40px; 
+        height: 32px; 
         width: auto;
+        max-width: 140px;
         object-fit: contain;
         opacity: 0;
-        transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+        transition: opacity 0.3s ease, filter 0.3s ease;
     }
     .logo-item:hover {
         opacity: 1;
         transform: translateY(-4px);
     }
 
-    .logo-item:nth-child(1) { height: 38px; } /* Code Square - landscape */
-    .logo-item:nth-child(2) { height: 100px; } /* Digital Studio - square, needs taller */
-    .logo-item:nth-child(3) { height: 38px; } /* Techno Square - landscape */
-    .logo-item:nth-child(4) { height: 38px; } /* M Square SVG - landscape */
+    .logo-item:nth-child(n) { height: 32px; } 
+    /* Digital Studio has large internal margins, needs extra scaling to match landscape logos */
+    .logo-item:nth-child(2) { height: 180px; max-width: 250px; transform: scale(1.1); } 
 
     @media (max-width: 1024px) {
         .hero-logos { gap: 2rem; }
         .logo-item { height: 32px; }
-        .logo-item:nth-child(2) { height: 80px; }
+        .logo-item:nth-child(2) { height: 130px; max-width: 180px; }
     }
     @media (max-width: 640px) {
         .hero-content { padding: 0 20px; }
         .hero-badge { width: clamp(100px, 25vw, 160px); height: clamp(100px, 25vw, 160px); margin-top: 20px; }
-        .hero-title { font-size: clamp(36px, 12vw, 60px); letter-spacing: 2px; }
-        .hero-desc { font-size: 14px; line-height: 1.6; }
-        .hero-logos { gap: 1rem; margin-top: 12px; flex-wrap: nowrap; }
-        .logo-item { height: 22px; }
-        .logo-item:nth-child(2) { height: 48px; }
+        .hero-title { font-size: clamp(34px, 12vw, 60px); letter-spacing: 1px; }
+        .hero-desc { font-size: 13px; line-height: 1.6; padding: 0 15px; width: 100%; max-width: 100%; box-sizing: border-box; }
+        .hero-logos { gap: 1rem; margin-top: 24px; flex-wrap: wrap; width: 100%; justify-content: center; padding: 0 16px; box-sizing: border-box; }
+        .logo-item { height: 15px; min-width: 0; flex-shrink: 0; max-width: 45%; }
+        .logo-item:nth-child(2) { height: 65px; max-width: 60%; }
     }
     @media (max-width: 400px) {
-        .hero-logos { gap: 0.6rem; }
-        .logo-item { height: 18px; }
-        .logo-item:nth-child(2) { height: 38px; }
+        .hero-title { font-size: clamp(28px, 10vw, 42px); }
+        .hero-logos { gap: 0.8rem; padding: 0 10px; }
+        .logo-item { height: 13px; }
+        .logo-item:nth-child(2) { height: 52px; }
     }
   `]
 })
