@@ -34,7 +34,7 @@
               "optimization": true,
               "sourceMap": false,
               "aot": true,
-              "buildOptimizer": true,
+
               "outputHashing": "all",
               "budgets": [
                 {

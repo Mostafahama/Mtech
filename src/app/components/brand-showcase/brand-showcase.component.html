@@ -15,15 +15,16 @@
       
       <!-- Left: Content -->
       <div class="brand-section__content reveal" [class.ltr-content]="i % 2 !== 0" [delay]="300" appReveal>
-        <span class="brand-badge">{{ brand.category }}</span>
-        <h1 class="brand-section__title">{{ brand.name }}</h1>
-        <p class="brand-section__description">{{ brand.description }}</p>
+        <span class="brand-badge">{{ brand.categoryKey | translate }}</span>
+        <h2 class="brand-section__title">{{ brand.nameKey | translate }}</h2>
+        <p class="brand-section__description">{{ brand.descriptionKey | translate }}</p>
         
         <div class="brand-section__ctas">
           <button 
             class="btn btn-primary"
-            (click)="handleCTA(brand.primaryCTA.action)">
-            {{ brand.primaryCTA.label }}
+            (click)="handleCTA(brand.primaryCTA.action)"
+            [attr.aria-label]="'Explore ' + (brand.nameKey | translate)">
+            {{ brand.primaryCTA.labelKey | translate }}
           </button>
         </div>
       </div>
@@ -33,9 +34,12 @@
         <div class="brand-image-wrapper">
             <img 
             [src]="brand.image" 
-            [alt]="brand.name"
+            [alt]="brand.nameKey | translate"
             class="brand-section__image"
-            loading="lazy" />
+            width="600"
+            height="750"
+            loading="lazy"
+            decoding="async" />
         </div>
       </div>
       

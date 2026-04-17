@@ -71,10 +71,10 @@
       />
 
       <!-- Title -->
-      <text x="600" y="680" class="hub-title">M TECH SQUARE</text>
+      <text x="600" y="680" class="hub-title">{{ centralHub.titleKey | translate }}</text>
 
       <!-- Subtitle -->
-      <text x="600" y="710" class="hub-subtitle">Unified Ecosystem</text>
+      <text x="600" y="710" class="hub-subtitle">{{ centralHub.subtitleKey | translate }}</text>
 
       <!-- Rotating outer ring -->
       <circle cx="600" cy="600" r="120" class="rotating-ring" />
@@ -168,10 +168,10 @@
     </div>
 
     <div class="modal-body">
-      <h2>{{ selectedPlanet.fullName }}</h2>
+      <h2>{{ selectedPlanet.nameKey | translate }}</h2>
       <p class="modal-year">Established {{ selectedPlanet.year }}</p>
 
-      <p class="modal-description">{{ selectedPlanet.description }}</p>
+      <p class="modal-description">{{ selectedPlanet.descriptionKey | translate }}</p>
 
       <!-- Stats -->
       <div class="modal-stats">
@@ -183,9 +183,7 @@
 
       <!-- Actions -->
       <div class="modal-actions">
-        <!-- Changed to default alerts due to missing handler routing, simple UI placeholders -->
-        <button class="btn-primary" (click)="closeModal()">Explore</button>
-        <button class="btn-secondary" (click)="closeModal()">Learn More</button>
+          <button class="btn-primary" (click)="closeModal()">EXPLORE</button>
       </div>
     </div>
   </div>

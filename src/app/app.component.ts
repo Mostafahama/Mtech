@@ -9,6 +9,9 @@ import { ContactComponent } from './components/contact/contact.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { EcosystemComponent } from './components/ecosystem/ecosystem.component';
 import { ProcessFlowComponent } from './components/process-flow/process-flow.component';
+import { SeoService } from './services/seo.service';
+
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +24,6 @@ import { ProcessFlowComponent } from './components/process-flow/process-flow.com
     TimelineComponent,
     EcosystemComponent,
     BrandShowcaseComponent,
-    ContactComponent,
     FooterComponent,
     ProcessFlowComponent
   ],
@@ -31,4 +33,16 @@ import { ProcessFlowComponent } from './components/process-flow/process-flow.com
 })
 export class AppComponent {
   title = 'mtech';
+
+  constructor(
+    private translate: TranslateService,
+    private seoService: SeoService
+  ) {
+    this.translate.addLangs(['en', 'ar']);
+    this.translate.setDefaultLang('en');
+    this.translate.use('en');
+    
+    // Initialize SEO
+    this.seoService.init();
+  }
 }

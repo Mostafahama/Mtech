@@ -1,26 +1,27 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { RevealDirective } from '../../shared/reveal.directive';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, RevealDirective],
+  imports: [CommonModule, TranslateModule, RevealDirective],
   template: `
-    <section class="contact-section" id="contact">
+    <section class="contact-section" id="contact" aria-labelledby="contact-title">
         <div class="contact-card reveal" appReveal>
             <!-- Left Column: Contact Info -->
             <div class="contact-info">
-                <h2 class="contact-info__title">Get In Touch</h2>
-                <p class="contact-info__desc">Have a project in mind? We'd love to hear from you. Reach out and let's create something extraordinary together.</p>
+                <h2 class="contact-info__title" id="contact-title">{{ 'contact.title' | translate }}</h2>
+                <p class="contact-info__desc">{{ 'contact.subtitle' | translate }}</p>
                 
                 <div class="contact-info__detail">
-                    <span class="contact-info__label">EMAIL</span>
+                    <span class="contact-info__label">{{ 'contact.email_label' | translate }}</span>
                     <span class="contact-info__value">info&#64;mtechsquare.com</span>
                 </div>
 
                 <div class="contact-info__detail">
-                    <span class="contact-info__label">PHONE</span>
+                    <span class="contact-info__label">{{ 'contact.phone_label' | translate }}</span>
                     <span class="contact-info__value">+20 123 456 7890</span>
                 </div>
 
@@ -30,10 +31,10 @@ import { RevealDirective } from '../../shared/reveal.directive';
                 </div>
 
                 <div class="contact-info__socials">
-                    <a href="#" class="social-link" aria-label="Facebook">f</a>
-                    <a href="#" class="social-link" aria-label="LinkedIn">in</a>
-                    <a href="#" class="social-link" aria-label="Twitter">tw</a>
-                    <a href="#" class="social-link" aria-label="Instagram">ig</a>
+                    <a href="#" class="social-link" aria-label="Facebook" title="Facebook">f</a>
+                    <a href="#" class="social-link" aria-label="LinkedIn" title="LinkedIn">in</a>
+                    <a href="#" class="social-link" aria-label="Twitter" title="Twitter">tw</a>
+                    <a href="#" class="social-link" aria-label="Instagram" title="Instagram">ig</a>
                 </div>
             </div>
 
@@ -41,41 +42,36 @@ import { RevealDirective } from '../../shared/reveal.directive';
             <div class="contact-form-container">
                 <form class="contact-form" (submit)="$event.preventDefault()">
                     <div class="form-group">
-                        <label class="form-label" for="contact-name">Name</label>
-                        <input id="contact-name" class="form-input" type="text" placeholder="John Doe" required>
+                        <label class="form-label" for="contact-name">{{ 'contact.name_label' | translate }}</label>
+                        <input id="contact-name" class="form-input" type="text" [placeholder]="'contact.name_label' | translate" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="contact-email">Email</label>
-                        <input id="contact-email" class="form-input" type="email" placeholder="john&#64;example.com" required>
+                        <label class="form-label" for="contact-email">{{ 'contact.email_label' | translate }}</label>
+                        <input id="contact-email" class="form-input" type="email" [placeholder]="'contact.email_label' | translate" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="contact-subject">Subject</label>
-                        <input id="contact-subject" class="form-input" type="text" placeholder="Project Inquiry" required>
+                        <label class="form-label" for="contact-subject">{{ 'contact.subject_label' | translate }}</label>
+                        <input id="contact-subject" class="form-input" type="text" [placeholder]="'contact.subject_label' | translate" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="contact-message">Message</label>
-                        <textarea id="contact-message" class="form-textarea" placeholder="Tell us about your project..." required></textarea>
+                        <label class="form-label" for="contact-message">{{ 'contact.message_label' | translate }}</label>
+                        <textarea id="contact-message" class="form-textarea" [placeholder]="'contact.message_label' | translate" required></textarea>
                     </div>
-                    <button type="submit" class="form-submit-btn">SEND MESSAGE</button>
+                    <button type="submit" class="form-submit-btn">{{ 'contact.submit_btn' | translate }}</button>
                 </form>
             </div>
         </div>
     </section>
   `,
   styles: [`
-    /* ═══════════════════════════════════════════════
-       CONTACT SECTION — Unified Card & Light Theme
-       ═══════════════════════════════════════════════ */
-
     .contact-section {
         padding: 120px 40px;
-        background: #F8F9FA; /* Light background for the section as requested */
+        background: #F8F9FA;
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
-    /* Unified Card Container */
     .contact-card {
         width: 100%;
         max-width: 1200px;
@@ -83,16 +79,20 @@ import { RevealDirective } from '../../shared/reveal.directive';
         grid-template-columns: 1fr 1.5fr;
         background: var(--white);
         border-radius: 20px;
-        overflow: hidden; /* This clips the left/right sections into the rounded corners */
-        box-shadow: 0 20px 60px rgba(0, 31, 63, 0.08); /* Soft elegant shadow */
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 31, 63, 0.08);
     }
 
-    /* ── Left Section (Navy Background) ──────────── */
     .contact-info {
         background: var(--navy);
         padding: 80px 60px;
         display: flex;
         flex-direction: column;
+    }
+
+    [lang="ar"] .contact-info__title {
+        font-family: var(--font-arabic);
+        letter-spacing: 0;
     }
 
     .contact-info__title {
@@ -137,7 +137,6 @@ import { RevealDirective } from '../../shared/reveal.directive';
         color: var(--white);
     }
 
-    /* Social Links */
     .contact-info__socials {
         display: flex;
         gap: 16px;
@@ -153,27 +152,11 @@ import { RevealDirective } from '../../shared/reveal.directive';
         border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 50%;
         color: var(--white);
-        background: transparent;
-        cursor: pointer;
         transition: all 300ms ease;
         text-decoration: none;
-        font-family: var(--font-sans);
-        font-weight: 600;
-        font-size: 14px;
     }
+    .social-link:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--white); }
 
-    .social-link:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: var(--white);
-    }
-
-    .social-link:focus {
-        outline: 2px solid var(--gold);
-        outline-offset: 4px;
-    }
-
-
-    /* ── Right Section (White Background) ────────── */
     .contact-form-container {
         background: var(--white);
         padding: 80px 60px;
@@ -182,18 +165,8 @@ import { RevealDirective } from '../../shared/reveal.directive';
         justify-content: center;
     }
 
-    .contact-form {
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-    }
-
-    /* Form Group */
-    .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
+    .contact-form { display: flex; flex-direction: column; gap: 24px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
 
     .form-label {
         font-family: var(--font-sans);
@@ -203,7 +176,6 @@ import { RevealDirective } from '../../shared/reveal.directive';
         letter-spacing: 0.5px;
     }
 
-    /* Input Field */
     .form-input,
     .form-textarea {
         font-family: var(--font-sans);
@@ -216,30 +188,21 @@ import { RevealDirective } from '../../shared/reveal.directive';
         color: var(--navy);
         transition: all 300ms ease;
         outline: none;
-        line-height: 1.5;
-        box-sizing: border-box;
         width: 100%;
+        box-sizing: border-box;
     }
 
-    .form-input::placeholder,
-    .form-textarea::placeholder {
-        color: #9EA5B4;
+    [lang="ar"] .form-input, [lang="ar"] .form-textarea, [lang="ar"] .form-label {
+        font-family: var(--font-arabic);
     }
 
-    /* Focus State */
-    .form-input:focus,
-    .form-textarea:focus {
+    .form-input:focus, .form-textarea:focus {
         border-color: var(--navy);
         box-shadow: 0 0 0 3px rgba(0, 31, 63, 0.05);
     }
 
-    /* Textarea */
-    .form-textarea {
-        resize: vertical;
-        min-height: 140px;
-    }
+    .form-textarea { resize: vertical; min-height: 140px; }
 
-    /* Submit Button (Solid Navy) */
     .form-submit-btn {
         width: 100%;
         background: var(--navy);
@@ -254,85 +217,22 @@ import { RevealDirective } from '../../shared/reveal.directive';
         border-radius: 8px;
         cursor: pointer;
         transition: all 300ms ease;
-        outline: none;
         margin-top: 10px;
     }
 
-    .form-submit-btn:hover:not(:disabled) {
-        background: var(--navy-dark);
-        transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(0, 31, 63, 0.15);
-    }
+    [lang="ar"] .form-submit-btn { font-family: var(--font-arabic); letter-spacing: 0; }
 
-    .form-submit-btn:active:not(:disabled) {
-        transform: translateY(0);
-    }
+    .form-submit-btn:hover { background: var(--navy-dark); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0, 31, 63, 0.15); }
 
-    .form-submit-btn:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
-
-    .form-submit-btn:focus {
-        outline: 2px solid var(--navy);
-        outline-offset: 4px;
-    }
-
-    /* ── Responsive ────────────────────────────── */
     @media (max-width: 1024px) {
-        .contact-card {
-            grid-template-columns: 1fr;
-        }
-
-        .contact-info {
-            padding: 50px 40px;
-        }
-
-        .contact-form-container {
-            padding: 50px 40px;
-        }
+        .contact-card { grid-template-columns: 1fr; }
+        .contact-info, .contact-form-container { padding: 50px 40px; }
     }
-
-    @media (max-width: 900px) {
-        .contact-section { padding: 80px 20px; }
-    }
-
     @media (max-width: 640px) {
-        .contact-info {
-            padding: 40px 24px;
-        }
-
-        .contact-form-container {
-            padding: 40px 24px;
-        }
-
-        .contact-info__title {
-            font-size: 32px;
-        }
-
-        .contact-info__desc {
-            font-size: 15px;
-        }
-
-        /* Prevent iOS auto zoom */
-        .form-input, .form-textarea {
-            font-size: 16px;
-            padding: 14px;
-        }
-    }
-
-    /* ── Accessibility ─────────────────────────── */
-    @media (prefers-reduced-motion: reduce) {
-        .form-submit-btn,
-        .social-link {
-            transition: none;
-        }
-        .form-submit-btn:hover,
-        .social-link:hover {
-            transform: none;
-        }
+        .contact-info, .contact-form-container { padding: 40px 24px; }
+        .contact-info__title { font-size: 32px; }
+        .form-input, .form-textarea { font-size: 16px; }
     }
   `]
 })
 export class ContactComponent { }
-

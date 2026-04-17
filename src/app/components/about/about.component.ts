@@ -1,24 +1,25 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { RevealDirective } from '../../shared/reveal.directive';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [CommonModule, RevealDirective],
+  imports: [CommonModule, TranslateModule, RevealDirective],
   template: `
-    <section class="about-section" id="about">
+    <section class="about-section" id="about" aria-labelledby="about-title">
         <div class="about-bg-animation">
             <div class="blob blob-1"></div>
             <div class="blob blob-2"></div>
         </div>
         <div style="font-size: 48px; color: rgba(213, 177, 130, 0.15); font-family: 'Playfair Display', serif; line-height: 1; margin-bottom: 5px;" class="reveal" appReveal>01</div>
-        <div class="about-label reveal" appReveal>THE PARENT ENTITY</div>
-        <h2 class="about-title serif-font reveal" [delay]="200" appReveal>M Tech Square Group</h2>
+        <div class="about-label reveal" appReveal>{{ 'about.label' | translate }}</div>
+        <h2 class="about-title serif-font reveal" id="about-title" [delay]="200" appReveal>{{ 'about.title' | translate }}</h2>
         <div class="about-text reveal" [delay]="400" appReveal>
-            <p>Establishing as a premier holding company in Cairo, M Tech Square Group unites five specialized entities under a singular vision of technological and educational excellence.</p>
-            <p>We serve as the strategic umbrella that fosters growth across software development, digital marketing, vocational training for youth, and medical professional development.</p>
-            <p>Our mission is to empower Egypt's next generation with the tools of tomorrow while providing world-class professional services to enterprises across the region.</p>
+            <p>{{ 'about.p1' | translate }}</p>
+            <p>{{ 'about.p2' | translate }}</p>
+            <p>{{ 'about.p3' | translate }}</p>
         </div>
     </section>
   `,
@@ -43,8 +44,20 @@ import { RevealDirective } from '../../shared/reveal.directive';
     .about-label { color: var(--gold); text-transform: uppercase; letter-spacing: 4px; font-size: 13px; font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
     .about-label::before, .about-label::after { content: ''; height: 1px; width: 40px; background: var(--gold); }
     .about-title { color: var(--navy-dark); font-size: clamp(36px, 5vw, 52px); margin-bottom: 40px; font-family: 'Playfair Display', serif; }
+    
+    [lang="ar"] .about-title { font-family: var(--font-arabic); font-weight: 700; letter-spacing: 0; }
+    [lang="ar"] .about-label { font-family: var(--font-arabic); letter-spacing: 1px; font-size: 14px; }
+
     .about-text { max-width: 800px; font-size: 18px; line-height: 1.9; font-weight: 400; }
     .about-text p { margin-bottom: 24px; }
+
+    @media (max-width: 640px) {
+        .about-section { padding: 80px 20px; }
+        .about-title { font-size: clamp(28px, 6vw, 36px); margin-bottom: 24px; }
+        .about-text { font-size: 15px; line-height: 1.7; }
+        .about-text p { margin-bottom: 16px; }
+        .about-label { font-size: 11px; letter-spacing: 3px; }
+    }
   `]
 })
 export class AboutComponent {}

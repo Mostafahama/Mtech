@@ -3,22 +3,18 @@
   <!-- ═══ SECTION HEADER ═══ -->
   <div class="eco__header">
     <div class="eco__header-num">03</div>
-    <h2 class="eco__header-label">Our Ecosystem</h2>
-    <h3 class="eco__header-title">The Innovation Galaxy</h3>
-    <p class="eco__header-desc">Four interconnected pillars driving Egypt's technology future — hover to explore each brand's role.</p>
+    <h2 class="eco__header-label">{{ 'ecosystem.title' | translate }}</h2>
+    <h3 class="eco__header-title">THE INNOVATION GALAXY</h3>
+    <p class="eco__header-desc">{{ 'ecosystem.desc' | translate }}</p>
   </div>
 
-  <!-- ═══ SVG CONTAINER (responsive wrapper) ═══ -->
   <div class="eco__canvas-wrap">
 
     <svg class="eco__svg" viewBox="0 0 900 900" preserveAspectRatio="xMidYMid meet"
          role="img" aria-label="M Tech Square Group interactive ecosystem diagram">
       <title>Ecosystem Visualization</title>
-      <desc>Interactive diagram showing how Techno Square, Code Square, M Square, and Digital Studio interconnect within the M Tech Square Group.</desc>
 
-      <!-- ═══ DEFS ═══ -->
       <defs>
-        <!-- Golden sphere radial gradient (highlight upper-left) -->
         <radialGradient id="ecoSphereGrad" cx="35%" cy="28%" r="70%" fx="35%" fy="28%">
           <stop offset="0%"   stop-color="#f7e3ad"/>
           <stop offset="18%"  stop-color="#dbb75c"/>
@@ -28,7 +24,6 @@
           <stop offset="100%" stop-color="#3a2a0b"/>
         </radialGradient>
 
-        <!-- Central hub gradient -->
         <radialGradient id="ecoCenterGrad" cx="50%" cy="50%" r="50%">
           <stop offset="0%"   stop-color="#f7e3ad"/>
           <stop offset="25%"  stop-color="#D5B182"/>
@@ -36,7 +31,6 @@
           <stop offset="100%" stop-color="#3a2a0b"/>
         </radialGradient>
 
-        <!-- Glow filter for planets -->
         <filter id="ecoGlow" x="-40%" y="-40%" width="180%" height="180%">
           <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
           <feMerge>
@@ -45,19 +39,16 @@
           </feMerge>
         </filter>
 
-        <!-- Soft glow for center pulse rings -->
         <filter id="ecoCenterGlow" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur in="SourceGraphic" stdDeviation="12"/>
         </filter>
 
-        <!-- Path gradient: gold → teal → gold -->
         <linearGradient id="ecoPathGrad" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%"   stop-color="#D5B182"/>
           <stop offset="50%"  stop-color="#1DD4BF"/>
           <stop offset="100%" stop-color="#D5B182"/>
         </linearGradient>
 
-        <!-- Subtle atmospheric aura around planets -->
         <radialGradient id="ecoPlanetAura" cx="50%" cy="50%" r="50%">
           <stop offset="60%"  stop-color="rgba(213,177,130,0)"/>
           <stop offset="100%" stop-color="rgba(213,177,130,0.12)"/>
@@ -65,7 +56,7 @@
       </defs>
 
 
-      <!-- ═══ BACKGROUND STARS (responsive count) ═══ -->
+      <!-- ═══ BACKGROUND STARS ═══ -->
       <g class="eco__stars" aria-hidden="true">
         <circle *ngFor="let s of (responsiveStars$ | async)"
           [attr.cx]="s.cx" [attr.cy]="s.cy" [attr.r]="s.r"
@@ -75,7 +66,7 @@
       </g>
 
 
-      <!-- ═══ CONNECTION PATHS (CSS-animated dashes) ═══ -->
+      <!-- ═══ CONNECTION PATHS ═══ -->
       <g class="eco__connections" aria-hidden="true">
         <path *ngFor="let path of connectionPaths; let i = index"
           class="eco__path"
@@ -86,29 +77,20 @@
           [attr.stroke]="path.type === 'center' ? 'url(#ecoPathGrad)' : 'rgba(29, 212, 191, 0.25)'"
           [attr.stroke-width]="path.type === 'center' ? '1.5' : '0.8'"
           stroke-dasharray="12 8"
-          stroke-linecap="round"
-          [attr.aria-label]="'Connection path ' + (i + 1)"/>
+          stroke-linecap="round"/>
       </g>
 
 
       <!-- ═══ CENTRAL HUB ═══ -->
-      <g class="eco__center" aria-label="M Tech Square Group — Central Hub">
-        <!-- Pulsing glow ring (CSS animated) -->
+      <g class="eco__center">
         <circle class="eco__center-pulse" cx="450" cy="450" r="95"
           fill="none" stroke="rgba(213, 177, 130, 0.15)" stroke-width="2"
           filter="url(#ecoCenterGlow)"/>
 
-        <!-- Second pulse ring (offset timing) -->
-        <circle class="eco__center-pulse eco__center-pulse--secondary" cx="450" cy="450" r="100"
-          fill="none" stroke="rgba(213, 177, 130, 0.08)" stroke-width="1"
-          stroke-dasharray="4 6"/>
-
-        <!-- Hub sphere -->
         <circle cx="450" cy="450" r="70" fill="url(#ecoCenterGrad)" filter="url(#ecoGlow)"/>
         <circle cx="450" cy="450" r="71" fill="none"
           stroke="rgba(213, 177, 130, 0.5)" stroke-width="1.5"/>
 
-        <!-- Hub text -->
         <text x="450" y="435" text-anchor="middle" class="eco__center-text eco__center-text--main">M TECH</text>
         <text x="450" y="458" text-anchor="middle" class="eco__center-text eco__center-text--sub">SQUARE</text>
         <text x="450" y="478" text-anchor="middle" class="eco__center-text eco__center-text--label">GROUP</text>
@@ -118,118 +100,37 @@
       <!-- ═══ SUBSIDIARY PLANETS ═══ -->
       <g *ngFor="let pillar of brandsPillars"
          class="eco__planet"
-         [class.eco__planet--active]="(hoveredPillar$ | async)?.id === pillar.id"
-         [attr.data-pillar]="pillar.id"
-         [attr.data-name]="pillar.nameLine1 + ' ' + pillar.nameLine2"
-         [attr.aria-label]="pillar.nameLine1 + ' ' + pillar.nameLine2 + ' — ' + pillar.subtitle"
-         role="button"
          tabindex="0"
+         role="button"
+         [attr.aria-label]="'Explore ' + (pillar.nameKey1 | translate) + ' ' + (pillar.nameKey2 | translate)"
+         [class.eco__planet--active]="(hoveredPillar$ | async)?.id === pillar.id"
          (mouseenter)="onPillarHover(pillar)"
          (mouseleave)="onPillarHover(null)"
          (click)="onPillarClick(pillar)"
          (keydown.enter)="onPillarClick(pillar)"
          (keydown.space)="onPillarClick(pillar); $event.preventDefault()">
 
-        <!-- Atmospheric aura -->
         <circle [attr.cx]="pillar.cx" [attr.cy]="pillar.cy" r="80"
           fill="url(#ecoPlanetAura)"/>
 
-        <!-- Planet sphere -->
         <circle class="eco__planet-sphere"
           [attr.cx]="pillar.cx" [attr.cy]="pillar.cy" r="60"
           fill="url(#ecoSphereGrad)"/>
 
-        <!-- Planet border ring -->
         <circle [attr.cx]="pillar.cx" [attr.cy]="pillar.cy" r="61"
           fill="none" stroke="rgba(213, 177, 130, 0.35)" stroke-width="1.5"/>
 
-        <!-- Planet text labels -->
         <text [attr.x]="pillar.cx" [attr.y]="pillar.cy - 12"
-          text-anchor="middle" class="eco__planet-name">{{ pillar.nameLine1 }}</text>
+          text-anchor="middle" class="eco__planet-name">{{ pillar.nameKey1 | translate }}</text>
         <text [attr.x]="pillar.cx" [attr.y]="pillar.cy + 10"
-          text-anchor="middle" class="eco__planet-name">{{ pillar.nameLine2 }}</text>
+          text-anchor="middle" class="eco__planet-name">{{ pillar.nameKey2 | translate }}</text>
         <text [attr.x]="pillar.cx" [attr.y]="pillar.cy + 28"
-          text-anchor="middle" class="eco__planet-subtitle">{{ pillar.subtitle }}</text>
-      </g>
-
-
-      <!-- ═══ DECORATIVE 4-POINTED STARS ═══ -->
-      <g aria-hidden="true">
-        <g class="eco__deco-star" transform="translate(100,100)" opacity="0.2">
-          <polygon points="0,-15 3,-3 15,0 3,3 0,15 -3,3 -15,0 -3,-3" fill="#D5B182"/>
-        </g>
-        <g class="eco__deco-star" transform="translate(800,800)" opacity="0.15">
-          <polygon points="0,-20 4,-4 20,0 4,4 0,20 -4,4 -20,0 -4,-4" fill="#D5B182"/>
-        </g>
-        <g class="eco__deco-star" transform="translate(820,120)" opacity="0.12">
-          <polygon points="0,-12 2,-2 12,0 2,2 0,12 -2,2 -12,0 -2,-2" fill="#1DD4BF"/>
-        </g>
-        <g class="eco__deco-star" transform="translate(80,780)" opacity="0.12">
-          <polygon points="0,-10 2,-2 10,0 2,2 0,10 -2,2 -10,0 -2,-2" fill="#1DD4BF"/>
-        </g>
+          text-anchor="middle" class="eco__planet-subtitle">{{ pillar.subtitleKey | translate }}</text>
       </g>
 
     </svg>
 
 
-    <!-- ═══ GLASS INFO CARDS (HTML overlay, positioned absolutely) ═══ -->
-    <ng-container *ngIf="hoveredPillar$ | async as hovered">
-      <div class="eco__info-card" [ngStyle]="getCardStyle(hovered)"
-           [attr.data-pillar]="hovered.id">
-        <div class="eco__info-card-header">
-          <span class="eco__info-card-initial">{{ hovered.initial }}</span>
-          <div>
-            <h4 class="eco__info-card-title">{{ hovered.nameLine1 }} {{ hovered.nameLine2 }}</h4>
-            <p class="eco__info-card-tagline">{{ hovered.tagline }}</p>
-          </div>
-        </div>
-        <ul class="eco__info-card-services">
-          <li *ngFor="let s of hovered.services">{{ s }}</li>
-        </ul>
-        <p class="eco__info-card-integration">
-          <span class="eco__info-card-integration-label">Ecosystem Role:</span>
-          {{ hovered.integration }}
-        </p>
-        <button class="eco__info-card-cta" (click)="scrollToSection(hovered.id)">
-          EXPLORE {{ hovered.nameLine1 }}
-        </button>
-      </div>
-    </ng-container>
-
   </div>
-
-
-  <!-- ═══ MODAL (full detail on click) ═══ -->
-  <ng-container *ngIf="selectedPillar$ | async as selected">
-    <div class="eco__modal-overlay" (click)="closeModal()"
-         role="dialog" aria-modal="true"
-         [attr.aria-labelledby]="'eco-modal-title-' + selected.id">
-      <div class="eco__modal" (click)="$event.stopPropagation()">
-        <button class="eco__modal-close" (click)="closeModal()"
-                aria-label="Close dialog">&times;</button>
-        <header class="eco__modal-header">
-          <div class="eco__modal-icon">{{ selected.initial }}</div>
-          <h2 class="eco__modal-title" [id]="'eco-modal-title-' + selected.id">
-            {{ selected.nameLine1 }} {{ selected.nameLine2 }}
-          </h2>
-          <div class="eco__modal-subtitle">{{ selected.subtitle }}</div>
-        </header>
-        <div class="eco__modal-body">
-          <p class="eco__modal-tagline">"{{ selected.tagline }}"</p>
-          <ul class="eco__modal-features">
-            <li *ngFor="let s of selected.services">{{ s }}</li>
-          </ul>
-          <div class="eco__modal-integration">
-            <strong>Ecosystem Integration:</strong> {{ selected.integration }}
-          </div>
-        </div>
-        <footer class="eco__modal-footer">
-          <button class="eco__modal-btn" (click)="scrollToSection(selected.id)">
-            LEARN MORE
-          </button>
-        </footer>
-      </div>
-    </div>
-  </ng-container>
 
 </section>

@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy, HostListener, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import gsap from 'gsap';
 
 class Particle {
@@ -31,26 +32,28 @@ class Particle {
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   template: `
-    <section class="hero" id="home">
+    <section class="hero" id="home" aria-label="Hero Spotlight">
         <div class="hero-bg">
             <canvas #heroCanvas></canvas>
         </div>
         <div class="hero-content">
             <div class="hero-badge" #heroBadge>
-                <img src="assets/m_tech_square_logo_updated.png" alt="Badge">
+                <img src="assets/m_tech_square_logo_updated.png" 
+                     alt="M Tech Square Group Central Logo"
+                     width="240" height="240"
+                     fetchPriority="high">
             </div>
-            <!-- Subtle radial glow behind the heading -->
             <div class="heading-glow"></div>
             <div class="hero-text-block">
-                <h1 class="hero-title serif-font" #heroTitle>BEYOND<br>SQUARES</h1>
-                <p class="hero-desc" #heroDesc>Driving the future of Egyptian innovation through a unified ecosystem of technology, classroom motivation, and medical excellence.</p>
+                <h1 class="hero-title serif-font" #heroTitle [innerHTML]="'hero.title' | translate"></h1>
+                <p class="hero-desc" #heroDesc>{{ 'hero.desc' | translate }}</p>
                 <div class="hero-logos" #heroLogos>
-                    <img src="assets/Asset 3.svg" alt="Code Square" class="logo-item">
-                    <img src="assets/Digital logo.png" alt="Digital Studio" class="logo-item">
-                    <img src="assets/landscape logo white.png" alt="Techno Square" class="logo-item">
-                    <img src="assets/M SQUARE copy new logo-01.png" alt="M Square" class="logo-item">
+                    <img src="assets/Asset 3.svg" alt="Code Square Branding" class="logo-item" width="120" height="40">
+                    <img src="assets/Digital logo.png" alt="Digital Studio Branding" class="logo-item" width="120" height="100">
+                    <img src="assets/landscape logo white.png" alt="Techno Square Branding" class="logo-item" width="120" height="40">
+                    <img src="assets/msquare_finalwhite.svg" alt="M Square Branding" class="logo-item" width="120" height="40">
                 </div>
             </div>
         </div>
@@ -62,34 +65,26 @@ class Particle {
     canvas { display: block; width: 100%; height: 100%; }
     .hero-content { 
         position: relative; z-index: 10; text-align: center; 
-        margin-top: 0; max-width: 900px; padding: 0 40px; 
+        max-width: 900px; padding: 0 40px; 
         display: flex; flex-direction: column; align-items: center;
-        /* Balanced vertical positioning, pushing down to avoid navbar */
         transform: translateY(35px);
     }
 
-    /* 2. Logo: No square border, larger, tracing drop-shadow, fade-up */
     .hero-badge {
         width: clamp(160px, 18vw, 240px); 
         height: clamp(160px, 18vw, 240px);
         display: flex; align-items: center; justify-content: center;
-        margin-top: 20px; /* Lower the main logo further */
+        margin-top: 30px;
         margin-bottom: 0px; opacity: 0;
-        filter: drop-shadow(2px 0 0 var(--gold))
-                drop-shadow(0 2px 0 var(--gold))
-                drop-shadow(-2px 0 0 var(--gold))
-                drop-shadow(0 -2px 0 var(--gold))
-                drop-shadow(0 0 25px rgba(213, 177, 130, 0.4));
+        filter: drop-shadow(0 0 25px rgba(213, 177, 130, 0.4));
     }
     .hero-badge img { width: 100%; height: 100%; object-fit: contain; }
 
-    /* Text block spacing */
-    .hero-text-block {
-        margin-top: 0px; /* Title super tight to badge */
-        display: flex; flex-direction: column; align-items: center;
+    .hero-text-block { 
+        margin-top: -10px; 
+        display: flex; flex-direction: column; align-items: center; 
     }
 
-    /* 6. Subtle radial glow behind heading */
     .heading-glow {
         position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%);
         width: 600px; height: 300px;
@@ -97,66 +92,72 @@ class Particle {
         pointer-events: none; z-index: -1;
     }
 
-    /* 1. Heading: reduced ~18%, better line-height & letter-spacing */
     .hero-title {
-        font-size: clamp(48px, 9vw, 108px); margin: 0 0 5px 0; /* Tighter gap to description */
+        font-size: clamp(48px, 9vw, 108px); margin: 0 0 5px 0;
         letter-spacing: 4px; line-height: 1.1;
         text-transform: uppercase; font-family: 'Playfair Display', serif;
         font-weight: 700; opacity: 0; color: var(--white);
     }
 
-    /* 3 & 4. Subheading: lighter weight, wider spacing, brighter */
+    [lang="ar"] .hero-title {
+        font-family: var(--font-arabic);
+        letter-spacing: 0;
+        line-height: 1.2;
+    }
+
     .hero-desc {
         font-size: clamp(15px, 2vw, 19px);
         color: rgba(255, 255, 255, 0.8);
-        margin: 0 0 5px 0; line-height: 1.85; /* Brought logos extremely close */
+        margin: 0 0 0px 0; line-height: 1.85;
         max-width: 680px; opacity: 0;
         letter-spacing: 0.3px; font-weight: 400;
     }
 
-    /* ── Logos row: visual-area matching ── */
     .hero-logos { 
         display: flex; 
         align-items: center; 
         justify-content: center; 
-        gap: 4.5rem; /* Increased gap for a more elegant, uncrowded look */
-        margin-top: -10px; /* Pull the logos up significantly */
+        gap: 3rem;
+        margin-top: 20px;
         flex-wrap: wrap; 
         width: 100%; 
-        max-width: 1000px; /* Slightly wider to accommodate increased gap */
+        max-width: 1000px;
     }
-    /* Wide logos (Code Square ~3:1, Techno Square ~3:1) */
     .logo-item { 
-        height: 40px; /* Very slightly smaller base height for premium feel */
+        height: 40px; 
         width: auto;
         object-fit: contain;
         opacity: 0;
-        filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
         transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease;
     }
     .logo-item:hover {
         opacity: 1;
         transform: translateY(-4px);
-        filter: drop-shadow(0 8px 16px rgba(213, 177, 130, 0.5));
     }
-    /* Square logos: image files contain internal padding, so need 
-       even larger heights to match visual weight of wide logos */
-    .logo-item:nth-child(2) { height: 125px; } /* Digital Studio */
-    .logo-item:nth-child(4) { height: 160px; } /* M Square - has more padding */
 
-    /* ── TABLET ── */
+    .logo-item:nth-child(1) { height: 38px; } /* Code Square - landscape */
+    .logo-item:nth-child(2) { height: 100px; } /* Digital Studio - square, needs taller */
+    .logo-item:nth-child(3) { height: 38px; } /* Techno Square - landscape */
+    .logo-item:nth-child(4) { height: 38px; } /* M Square SVG - landscape */
+
     @media (max-width: 1024px) {
         .hero-logos { gap: 2rem; }
-        .logo-item { height: 45px; }
-        .logo-item:nth-child(2) { height: 100px; }
-        .logo-item:nth-child(4) { height: 115px; }
+        .logo-item { height: 32px; }
+        .logo-item:nth-child(2) { height: 80px; }
     }
-    /* ── MOBILE ── */
     @media (max-width: 640px) {
-        .hero-logos { gap: 1.2rem; }
-        .logo-item { height: 35px; }
-        .logo-item:nth-child(2) { height: 75px; }
-        .logo-item:nth-child(4) { height: 85px; }
+        .hero-content { padding: 0 20px; }
+        .hero-badge { width: clamp(100px, 25vw, 160px); height: clamp(100px, 25vw, 160px); margin-top: 20px; }
+        .hero-title { font-size: clamp(36px, 12vw, 60px); letter-spacing: 2px; }
+        .hero-desc { font-size: 14px; line-height: 1.6; }
+        .hero-logos { gap: 1rem; margin-top: 12px; flex-wrap: nowrap; }
+        .logo-item { height: 22px; }
+        .logo-item:nth-child(2) { height: 48px; }
+    }
+    @media (max-width: 400px) {
+        .hero-logos { gap: 0.6rem; }
+        .logo-item { height: 18px; }
+        .logo-item:nth-child(2) { height: 38px; }
     }
   `]
 })
@@ -182,7 +183,6 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
     if (!this.isBrowser || this.initialized) return;
     this.initialized = true;
 
-    // Canvas setup
     const canvas = this.canvasRef.nativeElement;
     this.ctx = canvas.getContext('2d');
     if (this.ctx) {
@@ -193,13 +193,11 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
       this.animateParticles();
     }
 
-    // GSAP Timeline setup — stored for cleanup
     this.heroTimeline = gsap.timeline({ defaults: { ease: "power3.out" } });
     gsap.set(this.badge.nativeElement, { scale: 0.8, autoAlpha: 0, y: 40 });
     gsap.set(this.title.nativeElement, { y: 40, autoAlpha: 0 });
     gsap.set(this.desc.nativeElement, { y: 25, autoAlpha: 0 });
     
-    // Select all logo images
     const logos = this.logosContainer.nativeElement.querySelectorAll('img');
     gsap.set(logos, { x: -20, autoAlpha: 0 });
 
@@ -211,22 +209,13 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // Kill GSAP timeline to prevent memory leaks
-    if (this.heroTimeline) {
-      this.heroTimeline.kill();
-      this.heroTimeline = null;
-    }
-    // Cancel canvas animation loop
-    if (this.animationFrameId !== null) {
-      cancelAnimationFrame(this.animationFrameId);
-      this.animationFrameId = null;
-    }
+    if (this.heroTimeline) { this.heroTimeline.kill(); this.heroTimeline = null; }
+    if (this.animationFrameId !== null) { cancelAnimationFrame(this.animationFrameId); this.animationFrameId = null; }
     this.particles = [];
     this.ctx = null;
   }
 
-  @HostListener('window:resize')
-  resizeCanvas() {
+  @HostListener('window:resize') resizeCanvas() {
     if (this.isBrowser && this.canvasRef) {
       this.canvasRef.nativeElement.width = window.innerWidth;
       this.canvasRef.nativeElement.height = window.innerHeight;

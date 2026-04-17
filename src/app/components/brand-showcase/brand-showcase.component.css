@@ -280,8 +280,8 @@
   }
   
   .brand-section__container {
-    grid-template-columns: 1fr;
-    gap: 40px;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
   }
   
   .brand-section__container.rtl-layout {
@@ -289,33 +289,62 @@
   }
   
   .brand-section__title {
-    font-size: 32px;
+    font-size: 28px;
   }
   
   .brand-section__description {
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.6;
   }
   
   .brand-section__ctas {
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
   
   .btn {
     width: 100%;
-    padding: 14px 24px;
-    font-size: 12px;
+    padding: 12px 20px;
+    font-size: 11px;
     border-radius: 50px;
   }
   
   .brand-section__media {
-    max-width: 500px;
-    margin: 0 auto;
+    max-width: 100%;
   }
   
   .brand-image-wrapper {
-      aspect-ratio: 16/9;
+    aspect-ratio: 16/9;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .brand-section {
+    padding: 40px 16px;
+  }
+  
+  .brand-section__container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .brand-section__title {
+    font-size: 24px;
+  }
+  
+  .brand-section__description {
+    font-size: 13px;
+  }
+  
+  .brand-badge {
+    font-size: 10px;
+    padding: 6px 14px;
+    letter-spacing: 2px;
+  }
+  
+  .brand-image-wrapper {
+    aspect-ratio: 4/3;
   }
 }
 

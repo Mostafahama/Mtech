@@ -3,29 +3,28 @@ import {
   HostListener, AfterViewInit, OnDestroy, Inject, PLATFORM_ID
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Subject, fromEvent } from 'rxjs';
-import { takeUntil, debounceTime, map, startWith, distinctUntilChanged } from 'rxjs/operators';
+import { takeUntil, debounceTime, map, distinctUntilChanged } from 'rxjs/operators';
 
 /* ──────────────────────────────────────────────
    INTERFACES
    ────────────────────────────────────────────── */
 
-/** Represents a subsidiary brand in the ecosystem */
 export interface PillarData {
   id: string;
-  nameLine1: string;
-  nameLine2: string;
-  subtitle: string;
-  tagline: string;
+  nameKey1: string;
+  nameKey2: string;
+  subtitleKey: string;
+  taglineKey: string;
   initial: string;
-  services: string[];
-  integration: string;
+  servicesKey: string;
+  integrationKey: string;
   bubblePos: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
   cx: number;
   cy: number;
 }
 
-/** Star particle data for background */
 interface StarData {
   cx: number;
   cy: number;
@@ -34,46 +33,31 @@ interface StarData {
   delay: number;
 }
 
-/** Connection path between nodes */
 interface ConnectionPath {
   d: string;
   type: 'center' | 'inter';
 }
 
-/** Viewport size breakpoints */
 type ViewportTier = 'mobile' | 'tablet' | 'desktop';
 
 /* ──────────────────────────────────────────────
-   CONSTANTS — No magic numbers
+   CONSTANTS
    ────────────────────────────────────────────── */
 
-/** SVG viewBox dimensions */
 const SVG_SIZE = 900;
-
-/** Center point of the SVG canvas */
-const CENTER_X = SVG_SIZE / 2; // 450
-const CENTER_Y = SVG_SIZE / 2; // 450
-
-/** Orbital radius from center to subsidiaries */
+const CENTER_X = SVG_SIZE / 2;
+const CENTER_Y = SVG_SIZE / 2;
 const ORBITAL_RADIUS = 280;
-
-/** cos(45°) for diagonal placement */
 const DIAG = 0.707;
-
-/** Control point perpendicular offset for center paths */
 const CENTER_PATH_OFFSET = 40;
-
-/** Control point outward bow for inter-pillar paths */
 const INTER_PATH_BOW = 60;
 
-/** Responsive star counts per viewport tier */
 const STAR_COUNTS: Record<ViewportTier, number> = {
   mobile: 60,
   tablet: 120,
   desktop: 180
 };
 
-/** Breakpoint widths */
 const BREAKPOINTS = {
   TABLET: 768,
   DESKTOP: 1024
@@ -86,7 +70,7 @@ const BREAKPOINTS = {
 @Component({
   selector: 'app-ecosystem',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './ecosystem.component.html',
   styleUrls: ['./ecosystem.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -95,20 +79,15 @@ export class EcosystemComponent implements AfterViewInit, OnDestroy {
   private readonly isBrowser: boolean;
   private readonly destroy$ = new Subject<void>();
 
-  /* ── State Subjects ─────────────────────── */
   private hoveredPillarSubject = new BehaviorSubject<PillarData | null>(null);
   hoveredPillar$ = this.hoveredPillarSubject.asObservable();
 
   private selectedPillarSubject = new BehaviorSubject<PillarData | null>(null);
   selectedPillar$ = this.selectedPillarSubject.asObservable();
 
-  /** Whether user prefers reduced motion (accessibility) */
   prefersReducedMotion = false;
-
-  /** Current viewport tier for responsive star rendering */
   private viewportTierSubject = new BehaviorSubject<ViewportTier>('desktop');
 
-  /* ── Pillar Positions (pre-computed) ─────── */
   private readonly positions = {
     topLeft:     { cx: CENTER_X - ORBITAL_RADIUS * DIAG, cy: CENTER_Y - ORBITAL_RADIUS * DIAG },
     topRight:    { cx: CENTER_X + ORBITAL_RADIUS * DIAG, cy: CENTER_Y - ORBITAL_RADIUS * DIAG },
@@ -116,103 +95,90 @@ export class EcosystemComponent implements AfterViewInit, OnDestroy {
     bottomRight: { cx: CENTER_X + ORBITAL_RADIUS * DIAG, cy: CENTER_Y + ORBITAL_RADIUS * DIAG }
   };
 
-  /* ── Brand Pillars Data ─────────────────── */
   readonly brandsPillars: PillarData[] = [
     {
       id: 'techno',
-      nameLine1: 'TECHNO', nameLine2: 'SQUARE',
-      subtitle: 'Education Hub',
-      tagline: 'Inspiring the next generation of innovators',
+      nameKey1: 'ecosystem.pillars.techno.nameLine1',
+      nameKey2: 'ecosystem.pillars.techno.nameLine2',
+      subtitleKey: 'ecosystem.pillars.techno.subtitle',
+      taglineKey: 'ecosystem.pillars.techno.tagline',
       initial: 'T',
-      services: ['STEM & Robotics Programs', 'AI & Machine Learning Courses', 'Techno Gallery Events', 'Tech Conferences & Shows'],
-      integration: "Trains emerging talent that directly feeds Code Square's development pipeline.",
+      servicesKey: 'ecosystem.pillars.techno.services',
+      integrationKey: 'ecosystem.pillars.techno.integration',
       bubblePos: 'top-left',
       cx: this.positions.topLeft.cx, cy: this.positions.topLeft.cy
     },
     {
       id: 'code',
-      nameLine1: 'CODE', nameLine2: 'SQUARE',
-      subtitle: 'Software Development',
-      tagline: 'You imagine — we create',
+      nameKey1: 'ecosystem.pillars.code.nameLine1',
+      nameKey2: 'ecosystem.pillars.code.nameLine2',
+      subtitleKey: 'ecosystem.pillars.code.subtitle',
+      taglineKey: 'ecosystem.pillars.code.tagline',
       initial: 'C',
-      services: ['Mobile App Development', 'Enterprise Cloud Solutions', 'AI-Powered Products', 'Full-stack Web Platforms'],
-      integration: 'Builds the digital products that Digital Studio markets and distributes.',
+      servicesKey: 'ecosystem.pillars.code.services',
+      integrationKey: 'ecosystem.pillars.code.integration',
       bubblePos: 'top-right',
       cx: this.positions.topRight.cx, cy: this.positions.topRight.cy
     },
     {
       id: 'digital',
-      nameLine1: 'DIGITAL', nameLine2: 'STUDIO',
-      subtitle: 'Complete Agency',
-      tagline: 'Stories worth sharing',
+      nameKey1: 'ecosystem.pillars.digital.nameLine1',
+      nameKey2: 'ecosystem.pillars.digital.nameLine2',
+      subtitleKey: 'ecosystem.pillars.digital.subtitle',
+      taglineKey: 'ecosystem.pillars.digital.tagline',
       initial: 'D',
-      services: ['360° Digital Branding', 'Performance Marketing', 'Content & Social Strategy', 'Creative Art Direction'],
-      integration: 'Amplifies reach for all group companies through premium marketing campaigns.',
+      servicesKey: 'ecosystem.pillars.digital.services',
+      integrationKey: 'ecosystem.pillars.digital.integration',
       bubblePos: 'bottom-right',
       cx: this.positions.bottomRight.cx, cy: this.positions.bottomRight.cy
     },
     {
       id: 'msquare',
-      nameLine1: 'M', nameLine2: 'SQUARE',
-      subtitle: 'Media & Events',
-      tagline: 'Events that matter',
+      nameKey1: 'ecosystem.pillars.msquare.nameLine1',
+      nameKey2: 'ecosystem.pillars.msquare.nameLine2',
+      subtitleKey: 'ecosystem.pillars.msquare.subtitle',
+      taglineKey: 'ecosystem.pillars.msquare.tagline',
       initial: 'M',
-      services: ['Medical Conferences', 'Event Production', 'Cinematic Coverage', 'Visual Storytelling'],
-      integration: "Delivers large-scale events and media that showcase the group's expertise.",
+      servicesKey: 'ecosystem.pillars.msquare.services',
+      integrationKey: 'ecosystem.pillars.msquare.integration',
       bubblePos: 'bottom-left',
       cx: this.positions.bottomLeft.cx, cy: this.positions.bottomLeft.cy
     }
   ];
 
-  /* ── Stars (responsive count) ───────────── */
   private readonly allStars: StarData[] = this.generateStars(STAR_COUNTS.desktop);
 
-  /** Observable: stars sliced to current viewport tier count */
   responsiveStars$ = this.viewportTierSubject.pipe(
     distinctUntilChanged(),
     map(tier => this.allStars.slice(0, STAR_COUNTS[tier]))
   );
 
-  /* ── Connection Paths (built once) ──────── */
   readonly connectionPaths: ConnectionPath[] = [];
-
-  /* ── Memoized card styles ───────────────── */
   private cardStyleCache = new Map<string, Record<string, string>>();
 
   constructor(
     private cdr: ChangeDetectorRef,
+    public translate: TranslateService,
     @Inject(PLATFORM_ID) platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
     this.buildPaths();
-
-    // Detect reduced motion preference
     if (this.isBrowser) {
       this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     }
   }
 
-  /* ────────────────────────────────────────────
-     LIFECYCLE
-     ──────────────────────────────────────────── */
-
   ngAfterViewInit(): void {
     if (!this.isBrowser) return;
-
-    // Set initial viewport tier
     this.updateViewportTier();
-
-    // Listen to window resize (debounced 300ms) for responsive star count + card repositioning
     fromEvent(window, 'resize').pipe(
       debounceTime(300),
       takeUntil(this.destroy$)
     ).subscribe(() => {
       this.updateViewportTier();
-      this.cardStyleCache.clear(); // Invalidate card position cache on resize
+      this.cardStyleCache.clear();
       this.cdr.markForCheck();
     });
-
-    // Listen for reduced motion changes
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     motionQuery.addEventListener('change', (e) => {
       this.prefersReducedMotion = e.matches;
@@ -225,24 +191,18 @@ export class EcosystemComponent implements AfterViewInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  /* ────────────────────────────────────────────
-     INTERACTIONS
-     ──────────────────────────────────────────── */
-
-  /** Show info card on planet hover */
   onPillarHover(pillar: PillarData | null): void {
-    this.hoveredPillarSubject.next(pillar);
-    this.cdr.markForCheck();
+    // No-op: hover cards disabled
   }
 
-  /** Toggle modal on planet click */
   onPillarClick(pillar: PillarData): void {
-    const current = this.selectedPillarSubject.value;
-    this.selectedPillarSubject.next(current?.id === pillar.id ? null : pillar);
-    this.cdr.markForCheck();
+    // Scroll directly to the brand section
+    const el = document.getElementById(pillar.id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
-  /** Close the detail modal */
   closeModal(): void {
     if (!this.selectedPillarSubject.value) return;
     this.selectedPillarSubject.next(null);
@@ -254,7 +214,6 @@ export class EcosystemComponent implements AfterViewInit, OnDestroy {
     this.closeModal();
   }
 
-  /** Smooth-scroll to a brand section and close modal */
   scrollToSection(id: string): void {
     const el = document.getElementById(id);
     if (el) {
@@ -263,14 +222,6 @@ export class EcosystemComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  /* ────────────────────────────────────────────
-     CARD POSITIONING (memoized)
-     ──────────────────────────────────────────── */
-
-  /**
-   * Returns absolute position styles for an info card.
-   * Results are cached per pillar ID and invalidated on resize.
-   */
   getCardStyle(pillar: PillarData): Record<string, string> {
     if (this.cardStyleCache.has(pillar.id)) {
       return this.cardStyleCache.get(pillar.id)!;
@@ -284,21 +235,23 @@ export class EcosystemComponent implements AfterViewInit, OnDestroy {
     let top: string;
     let left: string;
 
+    const isRtl = this.translate.currentLang === 'ar';
+
     switch (pillar.bubblePos) {
       case 'top-left':
-        translateX = '-15%'; translateY = '0';
+        translateX = isRtl ? '15%' : '-15%'; translateY = '0';
         top = `${yPct + 10}%`; left = `${xPct - 5}%`;
         break;
       case 'top-right':
-        translateX = '-85%'; translateY = '0';
+        translateX = isRtl ? '85%' : '-85%'; translateY = '0';
         top = `${yPct + 10}%`; left = `${xPct + 5}%`;
         break;
       case 'bottom-left':
-        translateX = '-15%'; translateY = '-100%';
+        translateX = isRtl ? '15%' : '-15%'; translateY = '-100%';
         top = `${yPct - 10}%`; left = `${xPct - 5}%`;
         break;
       case 'bottom-right':
-        translateX = '-85%'; translateY = '-100%';
+        translateX = isRtl ? '85%' : '-85%'; translateY = '-100%';
         top = `${yPct - 10}%`; left = `${xPct + 5}%`;
         break;
     }
@@ -314,11 +267,6 @@ export class EcosystemComponent implements AfterViewInit, OnDestroy {
     return style;
   }
 
-  /* ────────────────────────────────────────────
-     PRIVATE HELPERS
-     ──────────────────────────────────────────── */
-
-  /** Generate deterministic star positions */
   private generateStars(count: number): StarData[] {
     return Array.from({ length: count }, (_, i) => ({
       cx: ((i * 97 + 31) % SVG_SIZE),
@@ -329,38 +277,30 @@ export class EcosystemComponent implements AfterViewInit, OnDestroy {
     }));
   }
 
-  /** Build Bézier connection paths between center↔pillars and pillars↔pillars */
   private buildPaths(): void {
-    // Center-to-pillar curved paths
     for (const p of this.brandsPillars) {
       const mx = (CENTER_X + p.cx) / 2;
       const my = (CENTER_Y + p.cy) / 2;
       const dx = p.cx - CENTER_X;
       const dy = p.cy - CENTER_Y;
       const len = Math.sqrt(dx * dx + dy * dy);
-      // Perpendicular offset for subtle curve
       const cpx = mx + (-dy / len) * CENTER_PATH_OFFSET;
       const cpy = my + (dx / len) * CENTER_PATH_OFFSET;
-
       this.connectionPaths.push({
         d: `M ${CENTER_X} ${CENTER_Y} Q ${cpx} ${cpy} ${p.cx} ${p.cy}`,
         type: 'center'
       });
     }
-
-    // Inter-pillar paths (adjacent subsidiaries)
     for (let i = 0; i < this.brandsPillars.length; i++) {
       const a = this.brandsPillars[i];
       const b = this.brandsPillars[(i + 1) % this.brandsPillars.length];
       const mx = (a.cx + b.cx) / 2;
       const my = (a.cy + b.cy) / 2;
-      // Bow the control point outward from center
       const dx = mx - CENTER_X;
       const dy = my - CENTER_Y;
       const len = Math.sqrt(dx * dx + dy * dy) || 1;
       const cpx = mx + (dx / len) * INTER_PATH_BOW;
       const cpy = my + (dy / len) * INTER_PATH_BOW;
-
       this.connectionPaths.push({
         d: `M ${a.cx} ${a.cy} Q ${cpx} ${cpy} ${b.cx} ${b.cy}`,
         type: 'inter'
@@ -368,7 +308,6 @@ export class EcosystemComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  /** Determine viewport tier from current window width */
   private updateViewportTier(): void {
     if (!this.isBrowser) return;
     const w = window.innerWidth;

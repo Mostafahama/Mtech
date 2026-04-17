@@ -311,10 +311,10 @@
     transform-origin: center;
 }
 
-/* Hover & Active: enhanced glow + scale */
+/* Hover & Active: enhanced glow + scale (transition-based for smooth interruptions) */
 .eco__planet:hover .eco__planet-sphere,
 .eco__planet--active .eco__planet-sphere {
-    animation: ecoPlanetGlowOn 0.3s var(--eco-ease-smooth) forwards;
+    filter: brightness(1.25) drop-shadow(0 0 24px rgba(213, 177, 130, 0.6));
 }
 
 .eco__planet:hover,

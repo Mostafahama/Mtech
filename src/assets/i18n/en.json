@@ -1,0 +1,196 @@
+{
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "journey": "Journey",
+    "ecosystem": "Ecosystem",
+    "brands": "Brands",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "BEYOND<br>SQUARES",
+    "desc": "Driving the future of Egyptian innovation through a unified ecosystem of technology, classroom motivation, and medical excellence."
+  },
+  "about": {
+    "label": "THE PARENT ENTITY",
+    "title": "M Tech Square Group",
+    "p1": "Establishing as a premier holding company in Port Said, M Tech Square Group unites five specialized entities under a singular vision of technological and educational excellence.",
+    "p2": "We serve as the strategic umbrella that fosters growth across software development, digital marketing, vocational training for youth, and medical professional development.",
+    "p3": "Our mission is to empower Egypt's next generation with the tools of tomorrow while providing world-class professional services to enterprises across the region."
+  },
+  "timeline": {
+    "header_title": "Our Journey",
+    "header_desc": "The Evolution of Our Ecosystem",
+    "items": {
+      "2022": {
+        "title": "M Square",
+        "desc": "Connecting medical professionals with global knowledge through specialized international conferences."
+      },
+      "2023": {
+        "title": "Techno Square",
+        "desc": "Egypt's pioneering tech education institute nurturing the next generation of innovators."
+      },
+      "2024": {
+        "title": "Digital Studio Square",
+        "desc": "Our creative marketing arm established to amplify brand presence across digital channels."
+      },
+      "2025": {
+        "title": "Code Square",
+        "desc": "Our flagship software house delivering bespoke enterprise and AI-powered mobile solutions."
+      }
+    }
+  },
+  "orbital": {
+    "central": {
+      "title": "M TECH SQUARE",
+      "subtitle": "Unified Ecosystem"
+    },
+    "planets": {
+      "techno": { "name": "Techno Square", "desc": "Education & Innovation" },
+      "online": { "name": "Online Platform", "desc": "Global E-Learning" },
+      "code": { "name": "Code Square", "desc": "Software Development" },
+      "msquare": { "name": "M Square", "desc": "Medical Conferences" },
+      "digital": { "name": "Digital Studio", "desc": "Digital Marketing" }
+    }
+  },
+  "ecosystem": {
+    "title": "OUR INNOVATION ECOSYSTEM",
+    "desc": "A unified network of specialized entities driving excellence across digital, educational, and professional sectors.",
+    "modal": {
+      "integration": "INTER-GROUP SYNERGY",
+      "services": "CORE COMPETENCIES",
+      "cta": "EXPLORE CASE STUDIES"
+    },
+    "pillars": {
+      "techno": {
+        "nameLine1": "TECHNO",
+        "nameLine2": "SQUARE",
+        "subtitle": "Education Hub",
+        "tagline": "Inspiring the next generation of innovators",
+        "integration": "Trains emerging talent that directly feeds Code Square's development pipeline.",
+        "services": ["STEM & Robotics Programs", "AI & Machine Learning Courses", "Techno Gallery Events", "Tech Conferences & Shows"]
+      },
+      "code": {
+        "nameLine1": "CODE",
+        "nameLine2": "SQUARE",
+        "subtitle": "Software Development",
+        "tagline": "You imagine — we create",
+        "integration": "Builds the digital products that Digital Studio markets and distributes.",
+        "services": ["Mobile App Development", "Enterprise Cloud Solutions", "AI-Powered Products", "Full-stack Web Platforms"]
+      },
+      "digital": {
+        "nameLine1": "DIGITAL",
+        "nameLine2": "STUDIO",
+        "subtitle": "Complete Agency",
+        "tagline": "Stories worth sharing",
+        "integration": "Amplifies reach for all group companies through premium marketing campaigns.",
+        "services": ["360° Digital Branding", "Performance Marketing", "Content & Social Strategy", "Creative Art Direction"]
+      },
+      "msquare": {
+        "nameLine1": "M",
+        "nameLine2": "SQUARE",
+        "subtitle": "Media & Events",
+        "tagline": "Events that matter",
+        "integration": "Delivers large-scale events and media that showcase the group's expertise.",
+        "services": ["Medical Conferences", "Event Production", "Cinematic Coverage", "Visual Storytelling"]
+      }
+    }
+  },
+  "process": {
+    "header_title": "Our Process",
+    "header_subtitle": "From Vision to Unified Impact.",
+    "step_prefix": "Step",
+    "tools_prefix": "Tools",
+    "steps": {
+      "step1": {
+        "title": "Educate",
+        "desc": "Techno Square trains emerging talent, building a foundation of logic and problem-solving.",
+        "tools": "STEM, Robotics, Logic"
+      },
+      "step2": {
+        "title": "Develop",
+        "desc": "Code Square employs top talent to build robust software systems and mobile products.",
+        "tools": "Flutter, Cloud, AI"
+      },
+      "step3": {
+        "title": "Market",
+        "desc": "Digital Studio takes the completed products and builds compelling market presence.",
+        "tools": "Ads, Content, Strategy"
+      },
+      "step4": {
+        "title": "Deliver",
+        "desc": "Online and M Square platforms distribute knowledge and solutions at scale globally.",
+        "tools": "LMS, Conferences, Reach"
+      }
+    }
+  },
+  "footer": {
+    "about_title": "M Tech Square Group",
+    "about_desc": "Unified innovation ecosystem across education, technology, and healthcare sectors in Egypt.",
+    "explore_title": "Explore",
+    "explore_about": "The Parent Entity",
+    "explore_process": "Our Process",
+    "explore_journey": "Journey",
+    "brands_title": "Brands",
+    "contact_title": "Contact",
+    "contact_location": "Port Said, Egypt",
+    "bottom_text": "© 2026 M Tech Square Group. Engineered for excellence."
+  },
+  "brands": {
+    "header_title": "Our Brands",
+    "header_desc": "Explore our specialized entities",
+    "pillars": {
+      "techno": {
+        "name": "Techno Square",
+        "category": "EDUCATION ACADEMY",
+        "desc": "Egypt's leading technology institute dedicated to nurturing young minds. We combine cutting-edge programming education with entrepreneurship training, preparing children for success in tomorrow's innovation economy.",
+        "primary": "Join Academy",
+        "secondary": "Syllabus"
+      },
+      "online": {
+        "name": "Online",
+        "category": "E-LEARNING PLATFORM",
+        "desc": "Advanced e-learning ecosystem providing accessibility to top-tier expertise. Our platform hosts both live masterclasses and recorded certification paths, bridging the learning gap.",
+        "primary": "Start Learning",
+        "secondary": "Teachers"
+      },
+      "code": {
+        "name": "Code Square",
+        "category": "SOFTWARE HOUSE",
+        "desc": "Premium software house delivering bespoke digital solutions. We specialize in mobile applications, enterprise software, and cloud systems. Innovation at the core of every line of code.",
+        "primary": "Start Project",
+        "secondary": "Portfolio"
+      },
+      "msquare": {
+        "name": "M Square",
+        "category": "MEDICAL ACADEMY",
+        "desc": "Medical conference experts, providing high-quality training and events that bridge medical professionals with global knowledge. Hosting with internationally certified accreditation.",
+        "primary": "View Events",
+        "secondary": "Contact"
+      },
+      "digital": {
+        "name": "Digital Studio",
+        "category": "CREATIVE AGENCY",
+        "desc": "Creative marketing agency blending data-driven strategies with premium design aesthetics. We build brands that resonate in the digital age, narrating your unique story.",
+        "primary": "Brand Audit",
+        "secondary": "Case Studies"
+      }
+    }
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Have a project in mind? We'd love to hear from you. Reach out and let's create something extraordinary together.",
+    "name_label": "Name",
+    "email_label": "Email",
+    "subject_label": "Subject",
+    "message_label": "Message",
+    "submit_btn": "Send Message"
+  },
+  "seo": {
+    "title": "M Tech Square Group - Unified Innovation Ecosystem",
+    "description": "Unified innovation ecosystem across education, technology, and healthcare sectors in Egypt. Join our journey of excellence.",
+    "keywords": "M Tech Square, Techno Square, Code Square, Digital Studio, M Square, Innovation Egypt, Web Development Port Said",
+    "og_title": "M Tech Square Group",
+    "og_description": "Five specialized brands working in perfect harmony."
+  }
+}
